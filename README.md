@@ -1,46 +1,20 @@
-# 🦙 X Llama: A Vite + Vue + SCSS Conversational Platform
+# 🦙 X Llama: A LLM-Powered AI Bot Platform
 
-Welcome to **X Llama**! 🦙 This project is a conversational platform built using **Vite**, **Vue**, and **SCSS**, designed for seamless interaction with large language models (LLMs). The project is part of an Object-Oriented Programming course, offering a modern UI with a sidebar layout inspired by contemporary design trends and utilizing fonts and icons from **Google Fonts**.
 
-## 🚀 Project Overview
 
-X Llama provides a dynamic, user-friendly platform where users can interact with both official and custom bots. The platform supports two distinct user roles: **System Administrators** and **Regular Users**, each with different functionalities and privileges.
+## 开发中的模块：
 
-### 👥 User Roles:
+### 聊天模块
 
-- **System Administrators**: Manage bots, set usage limits, adjust pricing, and control access for users.
-- **Regular Users**: Interact with bots and create or customize their own bots for specific purposes.
+目前已经实现了基本的前后端交互功能，使用了 Spring Boot、Vue 和 WebSocket 技术。在 Vue 中，通过监听服务器返回的信息，实时将 HTML 元素添加到页面上。当用户发送消息时，会通过 `websocket.send` 将信息传递到服务器，服务器则通过 `onmessage` 函数感知并处理该消息。为了初步展示功能，现在服务端会将用户发送的任何消息原样回复至该用户的 session。用户可以点击侧边栏的“Chat”按钮进行交互。与大模型交互的基础部分将由 [Artanisax](https://github.com/Artanisax) 负责开发。
 
-### 🤖 Bot Module:
+![chat](./imgs/chat.png)
 
-- **Official Bots**: Access models like ChatGPT-3.5 turbo, ChatGPT-4o, and ChatGPT-4o-mini.
-- **Custom Bots**: Build and personalize bots with special functions, such as translation, image generation, or mathematical calculations.
+### 用户模块
 
-### 💬 Conversation Features:
+该模块展示了前端如何查询后端数据库，使用 Axios 实现了数据请求，并在 `CorsConfig` 中进行了跨域配置，确保可以跨域访问。文档中提供了从创建数据库到运行程序的详细教程。用户数据的存储方式尚需负责该模块的同学进一步设计与实现。访问数据库效果如下图：
 
-- **Single-turn and Multi-turn Q&A**: Real-time response streaming with optional context clearing.
-- **Advanced Custom Bot Settings**: Customize bots with external knowledge, prompts, and improved interaction features.
-
-### 🛠️ Administrator Features:
-
-- Manage bot data: Add or modify bots, set pricing, and manage quotas for custom bots.
-- Export data: Retrieve statistics on user activity, bot interactions, and revenue.
-
-### 💸 Marketplace Module:
-
-- Purchase tokens to interact with bots. When tokens run out, users can switch to free bots (ChatGPT-3.5 turbo).
-
-### ⭐ Ratings and Search Modules:
-
-- **Search**: Fuzzy search for users and bots.
-- **Ratings and Comments**: Users can rate bots and leave feedback.
-
-### 🌟 Advanced Features
-
-- **Popularity Rankings**: Display and rank top bots by ratings and visits.
-- **Recommendations**: Suggest bots based on user behavior.
-- **Multiple Query Formats**: Support for text, images, files, and voice inputs.
-- **Prompt Refinement**: Provide advanced tools to enhance query quality.
+![front_back_end](./imgs/front_back_end.png)
 
 ## How to run the project
 

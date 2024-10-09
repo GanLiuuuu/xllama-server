@@ -44,9 +44,9 @@ public class WebSocketServer {
     public void onMessage(String message, Session session) {
         System.out.println("【websocket消】收到客户端消息: " + message + "，来自 session ID: " + session.getId());
         //TODO: 根据用户发送的message生成回复
-        
+
         // 通过 session ID 给当前用户发送消息
-        sendOneMessage(session.getId(), "服务器回复: " + message);
+        sendOneMessage(session.getId(), message);
     }
 
     // 此为广播消息
