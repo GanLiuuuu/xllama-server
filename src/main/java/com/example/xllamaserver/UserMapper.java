@@ -74,6 +74,15 @@ public interface UserMapper {
     """)
     List<Map<String, String>> getBotsByEmail(String email);
 
+    @Select("""
+        SELECT 
+            b.bot_name AS botName, 
+            b.description AS botDescription
+        FROM 
+            Bot b
+    """)
+    List<Map<String, String>> getAllBots();
+
     // 获取用户和 bots 的交互统计
     @Select("SELECT b.bot_id, b.bot_name, cs.interaction_count, cs.last_interaction " +
             "FROM ChatSummary cs " +
