@@ -17,7 +17,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:3000")  // 允许来自 http://localhost:3000 的跨域请求
 public class UserController {
     @Autowired
     private UserMapper userMapper;
@@ -215,24 +214,23 @@ public class UserController {
         try {
             if (username != null && !username.isEmpty()) userMapper.setUsername(username, email);
             if (about != null && !about.isEmpty()) userMapper.setAbout(about, email);
-            // if (emailAddress != null && !emailAddress.isEmpty()) userMapper.setEmail(emailAddress, email);
             if (firstName != null && !firstName.isEmpty()) userMapper.setFirstname(firstName, email);
             if (lastName != null && !lastName.isEmpty()) userMapper.setLastname(lastName, email);
-            if (country != null && !country.isEmpty()) {
-                userMapper.setCountry(country, email);
-            }
+            if (country != null && !country.isEmpty()) userMapper.setCountry(country, email);
 
-            // avatar
             if (photo != null && !photo.isEmpty()) {
-                String extension = getFileExtension(photo.getOriginalFilename());
-                String fileName = email + "." + extension;
-                String filePath = AVATAR_DIR + fileName;
-
-                saveFile(photo, filePath);
-                userMapper.setAvatarUrl(BASE_URL + "avatars/" + fileName, email);
+                String avatarUrl = uploadToSmms(photo);
+                System.out.println(1);
+                System.out.println(1);
+                System.out.println(avatarUrl);
+                if (avatarUrl != null) {
+                    userMapper.setAvatarUrl(avatarUrl, email);
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload avatar to sm.ms");
+                }
             }
 
-            // coverPhoto
+            // 更新封面照片
             if (coverPhoto != null && !coverPhoto.isEmpty()) {
                 String extension = getFileExtension(coverPhoto.getOriginalFilename());
                 String fileName = email + "." + extension;
@@ -247,6 +245,37 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user information.");
         }
     }
+
+    private String uploadToSmms(MultipartFile file) {
+        try {
+            File tempFile = File.createTempFile("avatar_", ".tmp");
+            file.transferTo(tempFile);  // 将上传的文件保存到临时文件中
+
+            // 使用 sm.ms 上传文件
+            HttpResponse<String> response = Unirest.post("https://smms.app/api/v2/upload")
+                    .header("Authorization", "xUYYZYpzzZFXNRoCiuy1OGjc7nGlgaIL") // 替换为你的 sm.ms API token
+                    .field("smfile", tempFile)
+                    .asString();
+
+            String responseBody = response.getBody();
+            JSONObject jsonResponse = JSONObject.parseObject(responseBody);
+            String imageUrl = null;
+
+            if ("image_repeated".equals(jsonResponse.getString("code"))) {
+                imageUrl = jsonResponse.getString("images");
+            } else {
+                imageUrl = JSONObject.parseObject(jsonResponse.getString("data")).getString("url");
+            }
+
+            tempFile.delete();
+
+            return imageUrl;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private void saveFile(MultipartFile file, String filePath) throws IOException {
         File destination = new File(filePath);
         destination.getParentFile().mkdirs();
@@ -256,6 +285,7 @@ public class UserController {
     private String getFileExtension(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
+
 
 
 
