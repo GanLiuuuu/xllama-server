@@ -16,14 +16,12 @@ public interface BotMapper {
     void insertBot(Bot bot);
 
     @Select("""
-        SELECT COUNT(*) FROM Bot JOIN user ON Bot.created_by = User.user_id 
-        WHERE Bot.name = #{name} AND Bot.version = #{version} AND User.username = #{authorname};""")
-    boolean ifexist(String name,String version,String authorname);
+        SELECT COUNT(*) FROM Bot WHERE Bot.name = #{name} AND Bot.version = #{version} AND created_by = #{author};""")
+    boolean ifexist(String name,String version,int author);
 
     @Select("""
-            SELECT * FROM Bot WHERE Bot.id IN
-            (SELECT Bot.id FROM Bot JOIN user ON Bot.created_by = User.user_id WHERE User.username = #{authorname});""")
-    List<Bot> selectbyauthorname(String authorname);
+            SELECT * FROM Bot WHERE id = #{author});""")
+    List<Bot> selectbyauthor(int author);
 
     @Update("UPDATE Bot SET name = #{name} WHERE id = #{botid};")
     void updateName(String name,int botid);
