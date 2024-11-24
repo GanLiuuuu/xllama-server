@@ -2,4 +2,6 @@
 /Users/liugan/Desktop/xllama-server/src/main/java/com/example/xllamaserver/UserController.java
 /Users/liugan/Desktop/xllama-server/src/main/java/com/example/xllamaserver/UserMapper.java
 /Users/liugan/Desktop/xllama-server/src/main/java/com/example/xllamaserver/XllamaServerApplication.java
+/Users/liugan/Desktop/xllama-server/src/main/java/com/example/xllamaserver/component/WebSocketServer.java
 /Users/liugan/Desktop/xllama-server/src/main/java/com/example/xllamaserver/config/CorsConfig.java
+/Users/liugan/Desktop/xllama-server/src/main/java/com/example/xllamaserver/config/WebSocketConfig.java

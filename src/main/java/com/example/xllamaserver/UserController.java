@@ -1,5 +1,8 @@
 package com.example.xllamaserver;
 
+import com.alibaba.fastjson2.JSONObject;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:3000")  // 允许来自 http://localhost:3000 的跨域请求
 public class UserController {
     @Autowired
     private UserMapper userMapper;
@@ -100,6 +104,34 @@ public class UserController {
     @PostMapping("/updateAvatar")
     public ResponseEntity<?> updateAvatar(@RequestParam("file") MultipartFile file, @RequestParam("email") String email) {
         try {
+            File tempFile = File.createTempFile("avatar_", ".tmp");
+            file.transferTo(tempFile);  // 将上传的文件保存到临时文件中
+
+            // 使用 sm.ms 上传文件
+            HttpResponse<String> response = Unirest.post("https://smms.app/api/v2/upload")
+                    .header("Authorization", "xUYYZYpzzZFXNRoCiuy1OGjc7nGlgaIL") // 替换为你的 sm.ms API token
+                    .field("smfile", tempFile)
+                    .asString();
+
+            // 解析上传响应
+            String responseBody = response.getBody();
+            JSONObject jsonResponse = JSONObject.parseObject(responseBody);
+            String imageUrl = null;
+
+            // 如果图片重复，获取重复图片的 URL
+            if ("image_repeated".equals(jsonResponse.getString("code"))) {
+                imageUrl = jsonResponse.getString("images");
+            } else {
+                imageUrl = JSONObject.parseObject(jsonResponse.getString("data")).getString("url");
+            }
+            System.out.println(1);
+            System.out.println(1);
+            System.out.println(1);
+            System.out.println(imageUrl);
+
+
+            // 删除临时文件
+            tempFile.delete();
             String uploadDir = "/Users/zhuyuhao/Desktop/OOAD/xllama-server/src/main/resources/static/avatars/";
             File directory = new File(uploadDir);
             if (!directory.exists()) {
