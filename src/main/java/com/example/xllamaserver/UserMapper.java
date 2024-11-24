@@ -1,7 +1,6 @@
 package com.example.xllamaserver;
 
 import org.apache.ibatis.annotations.*;
-
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +36,7 @@ public interface UserMapper {
     @Update("UPDATE user SET username = #{username} WHERE email = #{email}")
     int updateName(@Param("email") String email, @Param("username") String username);
 
-    @Update("UPDATE user SET avatar_url = #{AvatarUrl} WHERE email = #{email}")
+    @Update("UPDATE user SET avatarUrl = #{AvatarUrl} WHERE email = #{email}")
     int updateAvatarUrl(@Param("email") String email, @Param("AvatarUrl") String AvatarUrl);
 
     @Select("SELECT user_id FROM User WHERE email = #{email}")
@@ -80,4 +79,37 @@ public interface UserMapper {
             "JOIN Bot b ON cs.bot_id = b.bot_id " +
             "WHERE cs.user_id = #{userId}")
     List<Map<String, Object>> getUsageStats(int userId);
+
+
+    @Update("UPDATE user SET username = #{username} WHERE email = #{email}")
+    void setUsername(String username, String email);
+
+    @Update("UPDATE user SET about = #{about} WHERE email = #{email}")
+    void setAbout(String about, String email);
+
+    @Update("UPDATE user SET username = #{username} WHERE email = #{email}")
+    void setEmail(String emailAddress, String email);
+
+    @Update("UPDATE user SET firstname = #{firstName} WHERE email = #{email}")
+    void setFirstname(String firstName, String email);
+
+    @Update("UPDATE user SET lastname = #{lastName} WHERE email = #{email}")
+    void setLastname(String lastName, String email);
+
+    @Update("UPDATE user SET country = #{country} WHERE email = #{email}")
+    void setCountry(String country, String email);
+
+    @Update("UPDATE user SET avatarUrl = #{s} WHERE email = #{email}")
+    void setAvatarUrl(String s, String email);
+
+    @Update("UPDATE user SET coverPhoto = #{s} WHERE email = #{email}")
+    void setCoverPhoto(String s, String email);
+
+    @Select("SELECT username, email, avatarUrl, bio FROM User WHERE username LIKE CONCAT('%', #{username}, '%')")
+    List<Map<String, Object>> getUserDetailsByUsername(@Param("username") String username);
+
+    @Select("SELECT * FROM User WHERE email = #{email}")
+    Map<String, Object> getCompleteUserDetailsByEmail(@Param("email") String email);
+
+
 }
