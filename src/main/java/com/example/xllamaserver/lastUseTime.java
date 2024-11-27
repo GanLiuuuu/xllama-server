@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class Bot {
+public class lastUseTime {
     private Integer id;          // 用户ID
     private Integer views;
     private String name;          // bot名
@@ -13,10 +13,11 @@ public class Bot {
     private String avatarUrl;          // 头像
     private Float price;
     private String version;
-    private boolean isOfficial;
+    private boolean is_official;
     private String state;
     private String highlight;
-    private String createdBy;
-    private Timestamp createdAt;
+    private String created_by;
+    private Timestamp created_at;
+    private Timestamp lastTime;
 
 }

@@ -3,6 +3,7 @@ package com.example.xllamaserver;
 import com.alibaba.fastjson2.JSONObject;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,10 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/bots")
 public class BotController {
-    BotMapper botMapper;
+    @Autowired
+    private BotMapper botMapper;
     @PostMapping("/add")
     public String insertBot(@RequestPart("productDetails") Bot bot,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
-        if(botMapper.ifexist(bot.getName(),bot.getVersion(),bot.getCreated_by()))
+        if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
             return "bot already existed";
         bot.setAvatarUrl(uploadToSmms(avatarFile));
         //TODO:trans botfile
@@ -37,9 +39,9 @@ public class BotController {
     }
 
     @GetMapping("/userBots")
-    public List<Bot> showuserbot(@RequestParam("id") Integer user){
+    public List<Bot> showuserbot(@RequestParam("id") String user){
         try {
-            return botMapper.selectbyauthor(user);
+            return botMapper.selectByAuthor(user);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -48,7 +50,7 @@ public class BotController {
     @GetMapping("/botInfo")
     public Bot showbot(@RequestParam("id") Integer bot){
         try {
-            return botMapper.selectbyid(bot);
+            return botMapper.selectById(bot);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -57,26 +59,20 @@ public class BotController {
     @GetMapping("/avg")
     public float findavg(@RequestParam("id") Integer bot){
         try {
-            return botMapper.ratingavg(bot);
+            return botMapper.ratingAvg(bot);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @PostMapping("/paid")
-    public String Paid(@RequestParam("bot") Integer bot,@RequestParam("user") Integer user){
+    @PostMapping("/updateLT")
+    public String updateLastTime(@RequestParam("bot") Integer bot,@RequestParam("user") String user){
         try {
-            botMapper.insertpaid(true,user,bot);
-            return "Paid successfully";
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @GetMapping("/ifpaid")
-    public Boolean ifpaid(@RequestParam("") Integer bot,@RequestParam("") Integer user){
-        try {
-            return botMapper.ifpaid(user, bot);
+            if(botMapper.ifExistLT(user,bot))
+                botMapper.updateLT(user,bot);
+            else
+                botMapper.insertLT(user,bot);
+            return "Update successfully";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -91,17 +87,17 @@ public class BotController {
         }
     }
 
-    @PostMapping()
+    @PostMapping("addReview")
     public String addReview(@RequestPart("review")Review review){
         try {
-            botMapper.insertreviews(review);
+            botMapper.insertReviews(review);
             return "add review successfully!";
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @PostMapping()
+    @PostMapping("addFAQ")
     public String addFAQ(@RequestPart("FAQ")FAQ faq){
         try {
             botMapper.insertFAQs(faq);
@@ -120,6 +116,15 @@ public class BotController {
         }
     }
 
+    @GetMapping("/recentUse")
+    public List<lastUseTime> getRecentBot(@RequestParam("id") int user){
+        try{
+
+            return botMapper.getRecent(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     private String uploadToSmms(MultipartFile file) {
         try {
             File tempFile = File.createTempFile("avatar_", ".tmp");
@@ -149,4 +154,5 @@ public class BotController {
             return null;
         }
     }
+
 }
