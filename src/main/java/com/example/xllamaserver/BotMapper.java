@@ -23,7 +23,7 @@ public interface BotMapper {
     List<Bot> selectByAuthor(String author);
 
     @Select("""
-            SELECT * FROM Bot WHERE id = #{id});""")
+            SELECT * FROM Bot WHERE id = #{id};""")
     Bot selectById(Integer id);
     //TODO!!!
     @Select("""
