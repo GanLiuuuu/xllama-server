@@ -50,6 +50,7 @@ public class BotController {
     @GetMapping("/botInfo")
     public Bot showbot(@RequestParam("id") Integer bot){
         try {
+            botMapper.updateViews(bot);
             return botMapper.selectById(bot);
         } catch (Exception e) {
             throw new RuntimeException(e);
