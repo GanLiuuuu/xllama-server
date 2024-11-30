@@ -27,8 +27,8 @@ public interface BotMapper {
     Bot selectById(Integer id);
     //TODO!!!
     @Select("""
-            SELECT Bot.id, views, name, description, imgSrc, avatarUrl, price, version, state, highlight, createdBy, createdAt, lastTime FROM Bot JOIN LT ON LT.bot=Bot.id WHERE LT.user = #{id} desc LT.lastTime;""")
-    List<lastUseTime> getRecent(Integer userid);
+            SELECT Bot.id, views, name, description, imgSrc, avatarUrl, price, version, state, highlight, createdBy, createdAt, lastTime FROM Bot JOIN LT ON LT.bot=Bot.id WHERE LT.user = #{user} desc LT.lastTime;""")
+    List<lastUseTime> getRecent(String user);
     @Update("UPDATE Bot SET name = #{name} WHERE id = #{botid};")
     void updateName(String name,Integer botid);
 
@@ -69,7 +69,7 @@ public interface BotMapper {
     Integer ratingAvg(Integer botId);
 
     @Select("""
-    SELECT User.username as user, Reviews.bot as bot, Reviews.content as content, Reviews.rating as rating, User.avatar_url as avatarUrl,Reviews.date as date FROM Reviews
+    SELECT User.username as user, Reviews.bot as bot, Reviews.content as content, Reviews.rating as rating, User.avatarURL as avatarUrl,Reviews.date as date FROM Reviews
     Join User in User.email = Reviews.user
     WHERE bot=#{botid};""")
     List<Review> showreviews(Integer botid);

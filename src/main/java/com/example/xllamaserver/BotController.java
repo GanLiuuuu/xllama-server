@@ -88,7 +88,7 @@ public class BotController {
         }
     }
 
-    @PostMapping("addReview")
+    @PostMapping("/addReview")
     public String addReview(@RequestPart("review")Review review){
         try {
             botMapper.insertReviews(review);
@@ -98,7 +98,7 @@ public class BotController {
         }
     }
 
-    @PostMapping("addFAQ")
+    @PostMapping("/addFAQ")
     public String addFAQ(@RequestPart("FAQ")FAQ faq){
         try {
             botMapper.insertFAQs(faq);
@@ -118,7 +118,7 @@ public class BotController {
     }
 
     @GetMapping("/recentUse")
-    public List<lastUseTime> getRecentBot(@RequestParam("id") int user){
+    public List<lastUseTime> getRecentBot(@RequestParam("id") String user){
         try{
 
             return botMapper.getRecent(user);
