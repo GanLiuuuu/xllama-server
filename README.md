@@ -1,4 +1,4 @@
-# 🦙 X Llama: A LLM-Powered AI Bot Platform
+# 🦙 X Llama: A LLM-Powered AI com.example.xllamaserver.Bot Platform
 
 
 
