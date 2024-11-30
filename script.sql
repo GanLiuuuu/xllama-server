@@ -79,11 +79,6 @@ CREATE TABLE FAQs(
     bot INT,
     FOREIGN KEY (bot) REFERENCES Bot(id)
 );
-
-
-
-
-
 create table BotComment
 (
     comment_id   int auto_increment

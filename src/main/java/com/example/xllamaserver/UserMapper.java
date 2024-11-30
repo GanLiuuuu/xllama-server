@@ -62,21 +62,21 @@ public interface UserMapper {
 
     @Select("""
         SELECT 
-            b.bot_name AS botName, 
+            b.name AS botName, 
             b.description AS botDescription
         FROM 
             Bot b
         JOIN 
-            User u ON b.created_by = u.user_id
+            User u ON b.createdBy = u.email
         WHERE 
             u.email = #{email}
     """)
     List<Map<String, String>> getBotsByEmail(String email);
 
     // 获取用户和 bots 的交互统计
-    @Select("SELECT b.bot_id, b.bot_name, cs.interaction_count, cs.last_interaction " +
+    @Select("SELECT b.id, b.name, cs.interaction_count, cs.last_interaction " +
             "FROM ChatSummary cs " +
-            "JOIN Bot b ON cs.bot_id = b.bot_id " +
+            "JOIN Bot b ON cs.bot_id = b.id " +
             "WHERE cs.user_id = #{userId}")
     List<Map<String, Object>> getUsageStats(int userId);
 
