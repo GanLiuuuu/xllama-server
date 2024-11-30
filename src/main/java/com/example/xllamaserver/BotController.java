@@ -38,6 +38,14 @@ public class BotController {
         }
     }
 
+    @GetMapping("/recommand")
+    public List<Bot> recommendBots(String user){
+        try{
+            return botMapper.recommendBots(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     @GetMapping("/userBots")
     public List<Bot> showuserbot(@RequestParam("id") String user){
         try {
@@ -155,5 +163,4 @@ public class BotController {
             return null;
         }
     }
-
 }

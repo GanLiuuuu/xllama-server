@@ -79,4 +79,33 @@ public interface BotMapper {
 
     @Select("SELECT id,bot,question,answer FROM FAQs WHERE bot=#{botId};")
     List<FAQ> showFAQs(Integer botId);
+
+    @Select("""
+            WITH SelectedBots AS (
+                SELECT bot_id
+                FROM ChatSummary
+                WHERE user_id = #{user}
+                  AND interaction_count > 30
+                ORDER BY last_interaction DESC
+                LIMIT 5
+            )
+            , UsersOfSelectedBots AS (
+                SELECT DISTINCT user_id
+                FROM ChatSummary
+                WHERE bot_id IN (SELECT bot_id FROM SelectedBots)
+                  AND interaction_count > 30
+            )
+            , BotUsageSummary AS (
+                SELECT cs.bot_id, SUM(cs.interaction_count) AS total_interaction_count
+                FROM ChatSummary cs
+                JOIN UsersOfSelectedBots usb ON cs.user_id = usb.user_id
+                GROUP BY cs.bot_id
+            )
+            SELECT b.id as id, views, name, description, imgSrc, avatarUrl, price, version, state, highlight, createdBy, createdAt
+            FROM Bot b
+            JOIN BotUsageSummary bus ON b.id = bus.bot_id
+            ORDER BY bus.total_interaction_count DESC
+            LIMIT 5;
+            """)
+    List<Bot> recommendBots(String user);
 }
