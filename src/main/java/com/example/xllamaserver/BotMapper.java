@@ -70,7 +70,7 @@ public interface BotMapper {
 
     @Select("""
     SELECT User.username as user, Reviews.bot as bot, Reviews.content as content, Reviews.rating as rating, User.avatarURL as avatarUrl,Reviews.date as date FROM Reviews
-    Join User in User.email = Reviews.user
+    Join User on User.email = Reviews.user
     WHERE bot=#{botid};""")
     List<Review> showreviews(Integer botid);
 
