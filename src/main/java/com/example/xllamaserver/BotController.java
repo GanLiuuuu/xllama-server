@@ -89,9 +89,9 @@ public class BotController {
     }
 
     @PostMapping("/addReview")
-    public String addReview(@RequestPart("review")Review review){
+    public String addReview(@RequestParam("user") String user, @RequestParam("bot") Integer bot, @RequestParam("rating") Float rating, @RequestParam("content") String content){
         try {
-            botMapper.insertReviews(review);
+            botMapper.insertReviews(user, bot, content, rating);
             return "add review successfully!";
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -99,9 +99,9 @@ public class BotController {
     }
 
     @PostMapping("/addFAQ")
-    public String addFAQ(@RequestPart("FAQ")FAQ faq){
+    public String addFAQ(@RequestParam("bot") Integer bot, @RequestParam("rating") String question, @RequestParam("content") String answer){
         try {
-            botMapper.insertFAQs(faq);
+            botMapper.insertFAQs(bot, question, answer);
             return "add FAQ successfully!";
         } catch (Exception e) {
             throw new RuntimeException(e);

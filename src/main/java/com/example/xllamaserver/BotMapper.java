@@ -63,9 +63,9 @@ public interface BotMapper {
     boolean ifExistLT(String user,Integer bot);
 
     @Insert("INSERT INTO Reviews(user,bot,content,rating) VALUES (#{user},#{bot},#{content},#{rating});")
-    void insertReviews(Review review);
+    void insertReviews(String user,Integer bot,String content,Float rating);
 
-    @Select("SELECT Round(AVG(rating),2) FROM Reviews WHERE bot=#{botId};")
+    @Select("SELECT IFNULL(Round(AVG(rating),2),0) FROM Reviews WHERE bot=#{botId};")
     Integer ratingAvg(Integer botId);
 
     @Select("""
@@ -75,7 +75,7 @@ public interface BotMapper {
     List<Review> showreviews(Integer botid);
 
     @Insert("INSERT INTO FAQs(bot,question,answer) VALUES (#{bot},#{question},#{answer});")
-    void insertFAQs(FAQ faq);
+    void insertFAQs(Integer bot, String question,String answer);
 
     @Select("SELECT id,bot,question,answer FROM FAQs WHERE bot=#{botId};")
     List<FAQ> showFAQs(Integer botId);
