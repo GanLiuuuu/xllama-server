@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import com.alibaba.fastjson2.JSONObject;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
 
 import java.io.File;
 import java.io.IOException;
@@ -220,9 +223,6 @@ public class UserController {
 
             if (photo != null && !photo.isEmpty()) {
                 String avatarUrl = uploadToSmms(photo);
-                System.out.println(1);
-                System.out.println(1);
-                System.out.println(avatarUrl);
                 if (avatarUrl != null) {
                     userMapper.setAvatarUrl(avatarUrl, email);
                 } else {
@@ -232,12 +232,12 @@ public class UserController {
 
             // 更新封面照片
             if (coverPhoto != null && !coverPhoto.isEmpty()) {
-                String extension = getFileExtension(coverPhoto.getOriginalFilename());
-                String fileName = email + "." + extension;
-                String filePath = COVER_PHOTO_DIR + fileName;
-
-                saveFile(coverPhoto, filePath);
-                userMapper.setCoverPhoto(BASE_URL + "coverPhoto/" + fileName, email);
+                String coverPhotoPath = uploadToSmms(coverPhoto);
+                if (coverPhotoPath != null) {
+                    userMapper.setCoverPhoto(coverPhotoPath, email);
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload avatar to sm.ms");
+                }
             }
 
             return ResponseEntity.ok("User information updated successfully.");
@@ -246,35 +246,7 @@ public class UserController {
         }
     }
 
-    private String uploadToSmms(MultipartFile file) {
-        try {
-            File tempFile = File.createTempFile("avatar_", ".tmp");
-            file.transferTo(tempFile);  // 将上传的文件保存到临时文件中
 
-            // 使用 sm.ms 上传文件
-            HttpResponse<String> response = Unirest.post("https://smms.app/api/v2/upload")
-                    .header("Authorization", "xUYYZYpzzZFXNRoCiuy1OGjc7nGlgaIL") // 替换为你的 sm.ms API token
-                    .field("smfile", tempFile)
-                    .asString();
-
-            String responseBody = response.getBody();
-            JSONObject jsonResponse = JSONObject.parseObject(responseBody);
-            String imageUrl = null;
-
-            if ("image_repeated".equals(jsonResponse.getString("code"))) {
-                imageUrl = jsonResponse.getString("images");
-            } else {
-                imageUrl = JSONObject.parseObject(jsonResponse.getString("data")).getString("url");
-            }
-
-            tempFile.delete();
-
-            return imageUrl;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     private void saveFile(MultipartFile file, String filePath) throws IOException {
         File destination = new File(filePath);
@@ -311,8 +283,6 @@ public class UserController {
     @GetMapping("/details")
     public ResponseEntity<?> getUserDetailsByEmail(@RequestParam("email") String email) {
         try {
-            System.out.println("Received email: " + email); // 调试信息
-
             // 校验 email 参数是否为空
             if (email == null || email.trim().isEmpty()) {
                 return ResponseEntity.badRequest().body("Email parameter cannot be empty");
@@ -328,6 +298,57 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch user details");
+        }
+    }
+
+    @PostMapping("/writeComments")
+    public ResponseEntity<?> writeComments(@RequestBody Map<String, Object> payload) {
+        try {
+            // 从请求体中提取参数
+            String comment = (String) payload.get("comment");
+            int rating = Integer.parseInt(payload.get("rating").toString());
+            String email1 = (String) payload.get("email1");
+            String email2 = (String) payload.get("email2");
+
+            int profileId = userMapper.getUserIdByEmail(email1);
+            int commenterId = userMapper.getUserIdByEmail(email2);
+            userMapper.insertComment(profileId, commenterId, comment, rating);
+
+            return ResponseEntity.ok("Comment submitted successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to submit comment.");
+        }
+    }
+
+
+    private String uploadToSmms(MultipartFile file) {
+        try {
+            File tempFile = File.createTempFile("avatar_", ".tmp");
+            file.transferTo(tempFile);  // 将上传的文件保存到临时文件中
+
+            // 使用 sm.ms 上传文件
+            HttpResponse<String> response = Unirest.post("https://smms.app/api/v2/upload")
+                    .header("Authorization", "xUYYZYpzzZFXNRoCiuy1OGjc7nGlgaIL") // 替换为你的 sm.ms API token
+                    .field("smfile", tempFile)
+                    .asString();
+
+            String responseBody = response.getBody();
+            JSONObject jsonResponse = JSONObject.parseObject(responseBody);
+            String imageUrl = null;
+
+            if ("image_repeated".equals(jsonResponse.getString("code"))) {
+                imageUrl = jsonResponse.getString("images");
+            } else {
+                imageUrl = JSONObject.parseObject(jsonResponse.getString("data")).getString("url");
+            }
+
+            tempFile.delete();
+
+            return imageUrl;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

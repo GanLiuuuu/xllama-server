@@ -111,5 +111,7 @@ public interface UserMapper {
     @Select("SELECT * FROM User WHERE email = #{email}")
     Map<String, Object> getCompleteUserDetailsByEmail(@Param("email") String email);
 
+    @Insert(" INSERT INTO UserProfileComment (profile_owner_id, commenter_id, comment_text, rating, created_at) VALUES (#{profileOwnerId}, #{commenterId}, #{commentText}, #{rating}, CURRENT_TIMESTAMP) ")
+    void insertComment(Integer profileOwnerId, Integer commenterId, String commentText, Integer rating);
 
 }
