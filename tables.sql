@@ -50,7 +50,7 @@ CREATE TABLE Bot (
     state ENUM('Offline','Online','Error') DEFAULT 'Offline' NOT NULL,
     createdBy VARCHAR(100) NOT NULL,                        
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,  
-    FOREIGN KEY (created_by) REFERENCES User(email)
+    FOREIGN KEY (createdBy) REFERENCES User(email)
 );
 
 CREATE TABLE LT(
