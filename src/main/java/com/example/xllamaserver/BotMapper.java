@@ -11,15 +11,15 @@ public interface BotMapper {
 
     @Insert("""
          INSERT INTO Bot(name,description,imgSrc,avatarUrl,price,version,highlight,createdBy) 
-         VALUES(#{name},#{discription},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{created_by});""")
+         VALUES(#{name},#{discription},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{createdBy});""")
     void insertBot(Bot bot);
 
     @Select("""
-        SELECT COUNT(*) FROM Bot WHERE Bot.name = #{name} AND Bot.version = #{version} AND created_by = #{author};""")
+        SELECT COUNT(*) FROM Bot WHERE Bot.name = #{name} AND Bot.version = #{version} AND createdBy = #{author};""")
     boolean ifExist(String name, String version, String author);
 
     @Select("""
-            SELECT * FROM Bot WHERE created_by = #{author};""")
+            SELECT * FROM Bot WHERE createdBy = #{author};""")
     List<Bot> selectByAuthor(String author);
 
     @Select("""
