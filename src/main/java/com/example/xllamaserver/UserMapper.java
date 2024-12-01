@@ -123,4 +123,11 @@ public interface UserMapper {
     @Insert(" INSERT INTO UserProfileComment (profile_owner_id, commenter_id, comment_text, rating, created_at) VALUES (#{profileOwnerId}, #{commenterId}, #{commentText}, #{rating}, CURRENT_TIMESTAMP) ")
     void insertComment(Integer profileOwnerId, Integer commenterId, String commentText, Integer rating);
 
+    @Select("SELECT * FROM User")
+    List<Map<String, Object>> getAllUsers();
+
+    @Select("SELECT s.bot_id as id, b.name as projectName, b.state as status,s.last_interaction as last_use_time,s.interaction_count as interactionCount from " +
+            "Bot b join ChatSummary s on b.id = s.bot_id " +
+            "where s.user_id = #{userId}")
+    List<Map<String, Object>> getRecentUseBots(int userId);
 }
