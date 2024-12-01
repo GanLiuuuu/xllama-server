@@ -6,6 +6,19 @@ import java.util.List;
 
 @Mapper
 public interface BotMapper {
+    @Select("""
+        SELECT b.* FROM Bot b
+        INNER JOIN UserBots ub ON b.id = ub.bot_id
+        WHERE ub.user_email = #{email}
+        ORDER BY ub.created_at DESC
+    """)
+    List<Bot> getBotsByUserEmail(String email);
+
+    @Insert("INSERT INTO UserBots(user_email, bot_id) VALUES(#{userEmail}, #{botId})")
+    void addUserBot(@Param("userEmail") String userEmail, @Param("botId") Integer botId);
+
+    @Delete("DELETE FROM UserBots WHERE user_email = #{userEmail} AND bot_id = #{botId}")
+    void removeUserBot(@Param("userEmail") String userEmail, @Param("botId") Integer botId);
     @Select("SELECT * FROM Bot;")
     List<Bot> getAllBots();
 

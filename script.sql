@@ -188,5 +188,13 @@ create table ChatTopic
     constraint chattopic_ibfk_3
         foreign key (bot_id) references Bot (id)
 );
+CREATE TABLE UserBots (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      user_email VARCHAR(100) NOT NULL,
+      bot_id INT NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_email) REFERENCES User(email),
+      FOREIGN KEY (bot_id) REFERENCES Bot(id)
+);
 
 
