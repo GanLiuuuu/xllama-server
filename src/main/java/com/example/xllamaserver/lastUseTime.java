@@ -19,5 +19,5 @@ public class lastUseTime {
     private String created_by;
     private Timestamp created_at;
     private Timestamp lastTime;
-
+    private Float rating;
 }

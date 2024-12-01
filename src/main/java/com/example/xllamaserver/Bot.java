@@ -18,5 +18,6 @@ public class Bot {
     private String highlight;
     private String createdBy;
     private Timestamp createdAt;
+    private Float rating;
 
 }

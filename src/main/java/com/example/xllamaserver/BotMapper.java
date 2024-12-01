@@ -65,7 +65,7 @@ public interface BotMapper {
     @Insert("INSERT INTO Reviews(user,bot,content,rating) VALUES (#{user},#{bot},#{content},#{rating});")
     void insertReviews(Review review);
 
-    @Select("SELECT Round(AVG(rating),2) FROM Reviews WHERE bot=#{botId};")
+    @Select("SELECT Round(AVG(rating),5) FROM Reviews WHERE bot=#{botId};")
     Integer ratingAvg(Integer botId);
 
     @Select("""
