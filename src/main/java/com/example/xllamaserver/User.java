@@ -2,6 +2,7 @@ package com.example.xllamaserver;
 
 
 import lombok.Data;
+import java.sql.Timestamp;
 
 @Data
 public class User {
@@ -20,8 +21,12 @@ public class User {
     private String firstname;
     private String lastname;
     private String country;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-
+    public Integer getId() {
+        return Id;
+    }
 }
 
 

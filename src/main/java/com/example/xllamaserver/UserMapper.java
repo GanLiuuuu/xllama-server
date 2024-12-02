@@ -9,7 +9,7 @@ public interface UserMapper {
     @Select("SELECT * FROM user1")
     List<User> getAllUser();
 
-    @Insert("INSERT INTO user(username, email, password) VALUES(#{username}, #{email}, #{password})")
+    @Insert("INSERT INTO user(username, email, password,userType) VALUES(#{username}, #{email}, #{password},'regular')")
     void insertUser(User user);
 
     // 在注册新账户时调用，检查是否一个邮箱重复注册
