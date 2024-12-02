@@ -35,7 +35,9 @@ public class UserController {
     @GetMapping("/getUserId")
     public ResponseEntity<?> getUserIdByEmail(@RequestParam String email) {
         try {
+            System.out.println(email);
             Integer userId = userMapper.getUserIdByEmail(email);
+            System.out.println(userId);
             if (userId != null) {
                 return ResponseEntity.ok().body(Map.of("userId", userId));
             } else {

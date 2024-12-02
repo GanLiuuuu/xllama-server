@@ -197,4 +197,62 @@ CREATE TABLE UserBots (
       FOREIGN KEY (bot_id) REFERENCES Bot(id)
 );
 
+-- 首先创建管理员用户
+INSERT INTO User (email, username, password, userType)
+VALUES ('admin@system.com', 'admin', '123123', 'ADMIN');
 
+-- 禁用自增和外键检查
+
+-- 插入默认bot
+INSERT INTO Bot (
+    id,
+    name,
+    description,
+    is_official,
+    imgSrc,
+    avatarUrl,
+    price,
+    version,
+    highlight,
+    state,
+    createdBy
+) VALUES
+      (1,
+       'GPT-3.5',
+       'OpenAI的GPT-3.5模型，能够理解和生成自然语言或代码，适合日常使用。响应速度快，成本较低，是很多场景下的理想选择。',
+       TRUE,
+       '',
+       '',
+       0,
+       '3.5',
+       '响应快速，性价比高',
+       'Online',
+       'admin@system.com'
+      ),
+      (2,
+       'GPT-4',
+       'OpenAI最新的GPT-4模型，具有更强的理解能力和创造力。能够处理复杂任务，推理能力和准确度都显著提升。',
+       TRUE,
+       '',
+       '',
+       0.06,
+       '4.0',
+       '强大的分析和推理能力',
+       'Online',
+       'admin@system.com'
+      ),
+      (3,
+       'GPT-4 Mini',
+       'GPT-4的精简版本，在保持核心能力的同时提供更快的响应。适合需要平衡性能和效率的场景。',
+       TRUE,
+       '',
+       '',
+       0.03,
+       '4.0-mini',
+       '性能与效率的平衡之选',
+       'Online',
+       'admin@system.com'
+      );
+
+-- 重新启用自增和外键检查
+ALTER TABLE Bot AUTO_INCREMENT = 4;
