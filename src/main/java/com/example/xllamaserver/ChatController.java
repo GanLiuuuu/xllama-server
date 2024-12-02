@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -34,6 +35,15 @@ public class ChatController {
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.badRequest().body("Failed to save chat interaction");
+        }
+    }
+    @GetMapping("/history/{sessionId}")
+    public ResponseEntity<?> getChatHistory(@PathVariable Integer sessionId) {
+        try {
+            List<ChatInteraction> history = chatMapper.getChatHistory(sessionId);
+            return ResponseEntity.ok(history);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to get chat history");
         }
     }
 }
