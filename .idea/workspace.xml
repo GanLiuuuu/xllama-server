@@ -4,7 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="132ac021-b77b-446d-b5ca-fb710001ba78" name="Changes" comment="" />
+    <list default="true" id="8966a2e2-d67a-4ec1-af22-9352a37f2c12" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Bot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserBotsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserBotsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/XllamaServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/XllamaServerApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/CorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/CorsConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/WebSocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/WebSocketConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/lastUseTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/lastUseTime.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.xllamaserver.XllamaServerApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.example.xllamaserver.XllamaServerApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.example.xllamaserver.XllamaServerApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.example.xllamaserver.XllamaServerApplicationTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/xllamaserver/XllamaServerApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/xllamaserver/XllamaServerApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xllama-server-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/xllama-server-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +40,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -21,41 +47,39 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GanLiuuuu"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/GanLiuuuu/xllama-server.git",
+    "accountId": "5abe0d69-3a83-4b4c-9ebb-7bf7644ae7ba"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2pdhb18yxDB5ym7blWMnvp168Eh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="2pHFv1Rm3uqt4AWz5QnXDhssxLM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.XllamaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/天/OOAD/codes/CommandPattern&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.example.xllamaserver" />
-    </key>
-  </component>
+}]]></component>
   <component name="RunManager">
     <configuration name="XllamaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="xllama-server" />
@@ -76,33 +100,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="132ac021-b77b-446d-b5ca-fb710001ba78" name="Changes" comment="" />
-      <created>1732415320633</created>
+      <changelist id="8966a2e2-d67a-4ec1-af22-9352a37f2c12" name="Changes" comment="" />
+      <created>1733101928070</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1732415320633</updated>
-      <workItem from="1732415321781" duration="1722000" />
-      <workItem from="1732681402434" duration="1983000" />
-      <workItem from="1732701695273" duration="11109000" />
-      <workItem from="1732727729318" duration="252000" />
-      <workItem from="1732729447849" duration="624000" />
-      <workItem from="1732796895131" duration="932000" />
-      <workItem from="1732949613632" duration="140000" />
+      <updated>1733101928070</updated>
+      <workItem from="1733101929652" duration="189000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/xllamaserver/XllamaServerApplication.java</url>
-          <line>6</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
