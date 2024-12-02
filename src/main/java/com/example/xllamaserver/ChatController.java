@@ -59,4 +59,17 @@ public class ChatController {
             return ResponseEntity.badRequest().body("Failed to get chat history");
         }
     }
+    @DeleteMapping("/{sessionId}/history")
+    public ResponseEntity<?> clearSessionHistory(@PathVariable Integer sessionId) {
+        try {
+            chatMapper.deleteSessionHistory(sessionId);
+            System.out.println("deleted");
+            return ResponseEntity.ok()
+                    .body(Map.of("message", "Chat history cleared successfully"));
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", "Failed to clear chat history"));
+        }
+    }
 }

@@ -10,6 +10,6 @@ public class CorsConfig implements WebMvcConfigurer {
     //这个类可以支持跨域查询，否则会出现access denied的问题
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*");
+        registry.addMapping("/**").allowedMethods("*").allowedOrigins("*");
     }
 }

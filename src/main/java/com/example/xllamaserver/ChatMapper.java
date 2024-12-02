@@ -20,4 +20,6 @@ public interface ChatMapper {
 
     @Select("SELECT * FROM ChatInteraction WHERE session_id = #{sessionId} ORDER BY interaction_time ASC")
     List<Map<String, Object>> getSessionHistory(@Param("sessionId") Integer sessionId);
+    @Delete("DELETE FROM ChatInteraction WHERE session_id = #{sessionId}")
+    void deleteSessionHistory(@Param("sessionId") Integer sessionId);
 }
