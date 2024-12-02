@@ -159,6 +159,15 @@ public class BotController {
         return ResponseEntity.ok(bots);
     }
 
+    @GetMapping("/ifSubscribe")
+    public boolean ifUserBots(@RequestParam("botId") Integer bot,@RequestParam("email") String email) {
+        try{
+            return botMapper.ifUserBot(email,bot);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @PostMapping("/{email}/{botId}")
     public ResponseEntity<Void> addUserBot(
             @PathVariable String email,

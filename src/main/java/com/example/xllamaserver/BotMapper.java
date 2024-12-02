@@ -14,6 +14,12 @@ public interface BotMapper {
     """)
     List<Bot> getBotsByUserEmail(String email);
 
+    @Select("""
+        SELECT COUNT(*) FROM UserBots ub
+        WHERE ub.user_email = #{email} and ub.bot_id=#{bot};
+    """)
+    boolean ifUserBot(String email, Integer bot);
+
     @Insert("INSERT INTO UserBots(user_email, bot_id) VALUES(#{userEmail}, #{botId})")
     void addUserBot(@Param("userEmail") String userEmail, @Param("botId") Integer botId);
 
