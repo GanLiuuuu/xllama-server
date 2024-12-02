@@ -32,7 +32,7 @@ public interface BotMapper {
     boolean ifExist(String name, String version, String author);
 
     @Select("""
-            SELECT * FROM Bot WHERE createdBy = #{author});""")
+            SELECT * FROM Bot WHERE createdBy = #{author};""")
     List<Bot> selectByAuthor(String author);
 
     @Select("""
