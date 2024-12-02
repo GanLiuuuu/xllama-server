@@ -1,10 +1,13 @@
 package com.example.xllamaserver.component;
 
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnMessage;
 import jakarta.websocket.OnOpen;
@@ -15,14 +18,50 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.io.*;
+import java.net.Socket;
+
 @Component
 @ServerEndpoint("/chat")
 public class WebSocketServer {
-
     private Session session;
 
     private static CopyOnWriteArraySet<WebSocketServer> webSockets =new CopyOnWriteArraySet<>();
     private static Map<String,Session> sessionPool = new HashMap<String,Session>();
+
+    private class LLMClient {
+        private static String HOSTNAME = "127.0.0.1";
+        private static int PORT = 8899;
+
+        private static JSONObject socket(JSONObject send){
+            String host = HOSTNAME;
+            int port = PORT;
+
+            try {
+                Socket socket = new Socket(host, port);
+                System.out.println("Connected to Python server");
+                System.out.println("Send: " + send.toString());
+
+                OutputStream outputStream = socket.getOutputStream();
+                outputStream.write((send.toString() + "\r\n").getBytes());
+
+                InputStream inputStream = socket.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder jsonString = new StringBuilder();
+                String recv = null;
+                while((recv = reader.readLine())!=null) {
+                    System.out.println(recv);
+                    jsonString.append(recv);
+                }
+                System.out.println("Recv: " + jsonString);
+                socket.close();
+                return JSON.parseObject(jsonString.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
 
     @OnOpen
     public void onOpen(Session session) {
@@ -44,9 +83,19 @@ public class WebSocketServer {
     public void onMessage(String message, Session session) {
         System.out.println("【websocket消】收到客户端消息: " + message + "，来自 session ID: " + session.getId());
         //TODO: 根据用户发送的message生成回复
-
+        LLMClient client = new LLMClient();
+        HashMap<String, Object> chat = new HashMap<>();
+        chat.put("query", message);
+        chat.put("history", null);
+        JSONObject send = new JSONObject();
+        send.put("type", "chat");
+        send.put("value", chat);
+        JSONObject response = LLMClient.socket(send);
+        assert response != null;
+        String type = response.get("type").toString();
+        JSONObject value = response.getJSONObject("value");
         // 通过 session ID 给当前用户发送消息
-        sendOneMessage(session.getId(), message);
+        sendOneMessage(session.getId(), value.get("response").toString());
     }
 
     // 此为广播消息
@@ -72,7 +121,4 @@ public class WebSocketServer {
             }
         }
     }
-
-
-
 }
