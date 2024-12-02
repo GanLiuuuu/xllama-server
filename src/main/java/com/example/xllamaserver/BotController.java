@@ -100,7 +100,7 @@ public class BotController {
     }
 
     @PostMapping("/addFAQ")
-    public String addFAQ(@RequestParam("bot") Integer bot, @RequestParam("rating") String question, @RequestParam("content") String answer){
+    public String addFAQ(@RequestParam("bot") Integer bot, @RequestParam("question") String question, @RequestParam("answer") String answer){
         try {
             botMapper.insertFAQs(bot, question, answer);
             return "add FAQ successfully!";
