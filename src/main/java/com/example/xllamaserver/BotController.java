@@ -5,6 +5,7 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -112,9 +113,9 @@ public class BotController {
     }
 
     @PostMapping("/addReview")
-    public String addReview(@RequestPart("review")Review review){
+    public String addReview(@RequestParam("user") String user, @RequestParam("bot") Integer bot, @RequestParam("rating") Float rating, @RequestParam("content") String content){
         try {
-            botMapper.insertReviews(review);
+            botMapper.insertReviews(user, bot, content, rating);
             return "add review successfully!";
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -122,9 +123,9 @@ public class BotController {
     }
 
     @PostMapping("/addFAQ")
-    public String addFAQ(@RequestPart("FAQ")FAQ faq){
+    public String addFAQ(@RequestParam("bot") Integer bot, @RequestParam("question") String question, @RequestParam("answer") String answer){
         try {
-            botMapper.insertFAQs(faq);
+            botMapper.insertFAQs(bot, question, answer);
             return "add FAQ successfully!";
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -151,6 +152,27 @@ public class BotController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    @GetMapping("/{email}")
+    public ResponseEntity<List<Bot>> getUserBots(@PathVariable String email) {
+        List<Bot> bots = botMapper.getBotsByUserEmail(email);
+        return ResponseEntity.ok(bots);
+    }
+
+    @PostMapping("/{email}/{botId}")
+    public ResponseEntity<Void> addUserBot(
+            @PathVariable String email,
+            @PathVariable Integer botId) {
+        botMapper.addUserBot(email, botId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{email}/{botId}")
+    public ResponseEntity<Void> removeUserBot(
+            @PathVariable String email,
+            @PathVariable Integer botId) {
+        botMapper.removeUserBot(email, botId);
+        return ResponseEntity.ok().build();
     }
     private String uploadToSmms(MultipartFile file) {
         try {

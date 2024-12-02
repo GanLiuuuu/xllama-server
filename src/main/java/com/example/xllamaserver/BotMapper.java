@@ -6,6 +6,19 @@ import java.util.List;
 
 @Mapper
 public interface BotMapper {
+    @Select("""
+        SELECT b.* FROM Bot b
+        INNER JOIN UserBots ub ON b.id = ub.bot_id
+        WHERE ub.user_email = #{email}
+        ORDER BY ub.created_at DESC
+    """)
+    List<Bot> getBotsByUserEmail(String email);
+
+    @Insert("INSERT INTO UserBots(user_email, bot_id) VALUES(#{userEmail}, #{botId})")
+    void addUserBot(@Param("userEmail") String userEmail, @Param("botId") Integer botId);
+
+    @Delete("DELETE FROM UserBots WHERE user_email = #{userEmail} AND bot_id = #{botId}")
+    void removeUserBot(@Param("userEmail") String userEmail, @Param("botId") Integer botId);
     @Select("SELECT * FROM Bot;")
     List<Bot> getAllBots();
 
@@ -63,19 +76,19 @@ public interface BotMapper {
     boolean ifExistLT(String user,Integer bot);
 
     @Insert("INSERT INTO Reviews(user,bot,content,rating) VALUES (#{user},#{bot},#{content},#{rating});")
-    void insertReviews(Review review);
+    void insertReviews(String user,Integer bot,String content,Float rating);
 
-    @Select("SELECT Round(AVG(rating),5) FROM Reviews WHERE bot=#{botId};")
+    @Select("SELECT IFNULL(Round(AVG(rating),2),0) FROM Reviews WHERE bot=#{botId};")
     Integer ratingAvg(Integer botId);
 
     @Select("""
     SELECT User.username as user, Reviews.bot as bot, Reviews.content as content, Reviews.rating as rating, User.avatarURL as avatarUrl,Reviews.date as date FROM Reviews
-    Join User in User.email = Reviews.user
+    Join User on User.email = Reviews.user
     WHERE bot=#{botid};""")
     List<Review> showreviews(Integer botid);
 
     @Insert("INSERT INTO FAQs(bot,question,answer) VALUES (#{bot},#{question},#{answer});")
-    void insertFAQs(FAQ faq);
+    void insertFAQs(Integer bot, String question,String answer);
 
     @Select("SELECT id,bot,question,answer FROM FAQs WHERE bot=#{botId};")
     List<FAQ> showFAQs(Integer botId);

@@ -62,12 +62,12 @@ public interface UserMapper {
 
     @Select("""
         SELECT 
-            b.bot_name AS botName, 
+            b.name AS botName, 
             b.description AS botDescription
         FROM 
             Bot b
         JOIN 
-            User u ON b.created_by = u.user_id
+            User u ON b.createdBy = u.email
         WHERE 
             u.email = #{email}
     """)
@@ -83,9 +83,9 @@ public interface UserMapper {
     List<Map<String, String>> getAllBots();
 
     // 获取用户和 bots 的交互统计
-    @Select("SELECT b.bot_id, b.bot_name, cs.interaction_count, cs.last_interaction " +
+    @Select("SELECT b.id, b.name, cs.interaction_count, cs.last_interaction " +
             "FROM ChatSummary cs " +
-            "JOIN Bot b ON cs.bot_id = b.bot_id " +
+            "JOIN Bot b ON cs.bot_id = b.id " +
             "WHERE cs.user_id = #{userId}")
     List<Map<String, Object>> getUsageStats(int userId);
 
@@ -120,5 +120,7 @@ public interface UserMapper {
     @Select("SELECT * FROM User WHERE email = #{email}")
     Map<String, Object> getCompleteUserDetailsByEmail(@Param("email") String email);
 
+    @Insert(" INSERT INTO UserProfileComment (profile_owner_id, commenter_id, comment_text, rating, created_at) VALUES (#{profileOwnerId}, #{commenterId}, #{commentText}, #{rating}, CURRENT_TIMESTAMP) ")
+    void insertComment(Integer profileOwnerId, Integer commenterId, String commentText, Integer rating);
 
 }
