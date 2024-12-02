@@ -41,7 +41,7 @@ public interface UserMapper {
 
     @Select("SELECT user_id FROM User WHERE email = #{email}")
     Integer getUserIdByEmail(String email);
-
+    
     // 查询评论数据，包括评论者昵称
     @Select("""
         SELECT 
