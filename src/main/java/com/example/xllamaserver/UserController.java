@@ -35,6 +35,22 @@ public class UserController {
         System.out.println("bbbbb");
         return userMapper.getAllUser();
     }
+    @GetMapping("/getUserId")
+    public ResponseEntity<?> getUserIdByEmail(@RequestParam String email) {
+        try {
+            System.out.println(email);
+            Integer userId = userMapper.getUserIdByEmail(email);
+            System.out.println(userId);
+            if (userId != null) {
+                return ResponseEntity.ok().body(Map.of("userId", userId));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error getting user ID");
+        }
+    }
+
 
     @PostMapping("/add")
     public String insertUser(@RequestBody User user) {
