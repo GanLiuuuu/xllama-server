@@ -46,4 +46,17 @@ public class ChatController {
             return ResponseEntity.badRequest().body("Failed to get chat history");
         }
     }
+
+
+    @GetMapping("/session/{sessionId}/history")
+    public ResponseEntity<?> getSessionHistory(@PathVariable Integer sessionId) {
+        try {
+            List<Map<String, Object>> history = chatMapper.getSessionHistory(sessionId);
+            System.out.println(history);
+            return ResponseEntity.ok(history);
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.badRequest().body("Failed to get chat history");
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.example.xllamaserver;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ChatMapper {
@@ -16,4 +17,7 @@ public interface ChatMapper {
     void saveInteraction(ChatInteraction interaction);
     @Select("SELECT * FROM ChatInteraction WHERE session_id = #{sessionId} ORDER BY interaction_time ASC")
     List<ChatInteraction> getChatHistory(Integer sessionId);
+
+    @Select("SELECT * FROM ChatInteraction WHERE session_id = #{sessionId} ORDER BY interaction_time ASC")
+    List<Map<String, Object>> getSessionHistory(@Param("sessionId") Integer sessionId);
 }
