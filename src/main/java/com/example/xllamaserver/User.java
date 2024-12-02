@@ -5,9 +5,23 @@ import lombok.Data;
 
 @Data
 public class User {
-    private Long id;
-    private String username;
-    private String password;
-    private String bio;
+
+    private Integer Id;          // 用户ID
+    private String username;          // 用户名
+    private String password;          // 密码
+    private String email;             // 邮箱
+    private String userType;          // 用户类型
+    private String avatarUrl;         // 头像URL
+    private String bio;               // 自我介绍
+    private Integer points;           // 积分数
+    private Integer tokens;           // tokens
+    private String coverPhoto;
+    private String about;
+    private String firstname;
+    private String lastname;
+    private String country;
+
+
 }
+
 
