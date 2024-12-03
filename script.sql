@@ -206,55 +206,18 @@ VALUES ('3163781466@qq.com', 'lg', '123123', 'regular');
 -- 禁用自增和外键检查
 
 -- 插入默认bot
-INSERT INTO Bot (
-    id,
-    name,
-    description,
-    is_official,
-    imgSrc,
-    avatarUrl,
-    price,
-    version,
-    highlight,
-    state,
-    createdBy
-) VALUES
-      (1,
-       'GPT-3.5',
-       'OpenAI的GPT-3.5模型，能够理解和生成自然语言或代码，适合日常使用。响应速度快，成本较低，是很多场景下的理想选择。',
-       TRUE,
-       '',
-       '',
-       0,
-       '3.5',
-       '响应快速，性价比高',
-       'Online',
-       'admin@system.com'
-      ),
-      (2,
-       'GPT-4',
-       'OpenAI最新的GPT-4模型，具有更强的理解能力和创造力。能够处理复杂任务，推理能力和准确度都显著提升。',
-       TRUE,
-       '',
-       '',
-       0.06,
-       '4.0',
-       '强大的分析和推理能力',
-       'Online',
-       'admin@system.com'
-      ),
-      (3,
-       'GPT-4 Mini',
-       'GPT-4的精简版本，在保持核心能力的同时提供更快的响应。适合需要平衡性能和效率的场景。',
-       TRUE,
-       '',
-       '',
-       0.03,
-       '4.0-mini',
-       '性能与效率的平衡之选',
-       'Online',
-       'admin@system.com'
-      );
+INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+VALUES ('GPT3.5-turbo', 'General purpose chat model with broad knowledge', TRUE, 'https://ehall.sustech.edu.cn/new/portal/custom/img/logo/logo-mini.png', 'https://cas.sustech.edu.cn/cas/images/sustech.png', 6.99, '1.0', 'highlight introduction', '3163781466@qq.com');
+INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+VALUES ('GPT4-turbo', 'Most capable GPT-4 model for general tasks', TRUE, 'https://cdn.pixabay.com/photo/2020/03/08/05/11/android-4911426_1280.png', 'https://cdn.pixabay.com/photo/2017/01/31/17/43/android-2025857_1280.png', 19.99, '1.0', 'highlight introduction', '3163781466@qq.com');
+INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+VALUES ('GPT4-mini', 'Smaller, faster version of GPT-4', FALSE, 'https://cdn.pixabay.com/photo/2020/03/07/08/16/android-4909082_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911417_1280.png', 16.99, '1.0', 'highlight introduction', '3163781466@qq.com');
+INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+VALUES ('DALL-E 3', 'Advanced image generation model', FALSE, 'https://cdn.pixabay.com/photo/2024/08/29/05/21/robot-9005785_1280.png', 'https://cdn.pixabay.com/photo/2016/08/23/05/45/bot-1613604_1280.png', 8.99, '1.0', 'highlight introduction', '3163781466@qq.com');
+INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+VALUES ('Translator', 'Specialized in language translation', FALSE, 'https://cdn.pixabay.com/photo/2020/02/13/02/34/robot-4844306_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911414_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com');
+INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+VALUES ('Math Solver', 'Specialized in solving mathematical problems', FALSE, 'https://pixabay.com/illustrations/ai-generated-brain-mind-technology-8563260/', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911416_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com');
 
 -- 重新启用自增和外键检查
 ALTER TABLE Bot AUTO_INCREMENT = 4;
