@@ -2,6 +2,7 @@ package com.example.xllamaserver;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,32 @@ public class ChatController {
     @PostMapping("/interaction")
     public ResponseEntity<?> saveInteraction(@RequestBody ChatInteraction interaction) {
         try {
+            // 1. 获取 bot 的价格
+            Float botPrice = chatMapper.getBotPrice(interaction.getBotId());
+            if (botPrice == null) {
+                return ResponseEntity.badRequest().body("Bot not found");
+            }
+
+            // 2. 检查用户的 tokens 是否足够
+            Integer userTokens = chatMapper.getUserTokens(interaction.getUserId());
+            if (userTokens == null) {
+                return ResponseEntity.badRequest().body("User not found");
+            }
+
+            if (userTokens < botPrice) {
+                return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED)
+                        .body("Insufficient tokens");
+            }
+
+            // 3. 扣除用户的 tokens
+            int updateResult = chatMapper.deductUserTokens(interaction.getUserId(), botPrice);
+            if (updateResult != 1) {
+                return ResponseEntity.badRequest().body("Failed to deduct tokens");
+            }
+
+            // 4. 保存交互记录
             chatMapper.saveInteraction(interaction);
+            
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             System.out.println(e);
