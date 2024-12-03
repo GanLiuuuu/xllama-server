@@ -12,13 +12,23 @@ public class UserDTO {
     private String bio;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private int points;
-    private int tokens;
+    private float points;
+    private float tokens;
     private String coverPhoto;
     private String about;
     private String firstname;
     private String lastname;
     private String country;
+    private String freeTokens;
+
+
+    public String getFreeTokens() {
+        return freeTokens;
+    }
+
+    public void setFreeTokens(String freeTokens) {
+        this.freeTokens = freeTokens;
+    }
 
     // Getters and Setters
     public int getUserId() {
@@ -93,7 +103,7 @@ public class UserDTO {
         this.updatedAt = updatedAt;
     }
 
-    public int getPoints() {
+    public float getPoints() {
         return points;
     }
 
@@ -101,7 +111,7 @@ public class UserDTO {
         this.points = points;
     }
 
-    public int getTokens() {
+    public float getTokens() {
         return tokens;
     }
 

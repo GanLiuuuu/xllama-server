@@ -14,8 +14,8 @@ public class User {
     private String userType;          // 用户类型
     private String avatarUrl;         // 头像URL
     private String bio;               // 自我介绍
-    private Integer points;           // 积分数
-    private Integer tokens;           // tokens
+    private float points;           // 积分数
+    private float tokens;           // tokens
     private String coverPhoto;
     private String about;
     private String firstname;
@@ -23,6 +23,7 @@ public class User {
     private String country;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private float freeTokens;
 
     public Integer getId() {
         return Id;
