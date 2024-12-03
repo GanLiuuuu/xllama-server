@@ -85,7 +85,7 @@ public interface BotMapper {
     void insertReviews(String user,Integer bot,String content,Float rating);
 
     @Select("SELECT IFNULL(Round(AVG(rating),2),0) FROM Reviews WHERE bot=#{botId};")
-    Integer ratingAvg(Integer botId);
+    Float ratingAvg(Integer botId);
 
     @Select("""
     SELECT User.username as user, Reviews.bot as bot, Reviews.content as content, Reviews.rating as rating, User.avatarURL as avatarUrl,Reviews.date as date FROM Reviews
