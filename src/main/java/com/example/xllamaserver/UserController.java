@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
 import com.alibaba.fastjson2.JSONObject;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
@@ -280,8 +283,12 @@ public class UserController {
     @GetMapping("/searchUsers")
     public ResponseEntity<?> searchUsersByUsername(@RequestParam("username") String username) {
         try {
-            if (username == null || username.trim().isEmpty()) {
+            if (username == null) {
                 return ResponseEntity.badRequest().body("Username parameter cannot be empty");
+            }
+            if (username.isEmpty()){
+                List<Map<String, Object>> users = userMapper.getAllUsers();
+                return ResponseEntity.ok(users);
             }
 
             List<Map<String, Object>> users = userMapper.getUserDetailsByUsername(username.trim());
@@ -329,11 +336,57 @@ public class UserController {
             int profileId = userMapper.getUserIdByEmail(email1);
             int commenterId = userMapper.getUserIdByEmail(email2);
             userMapper.insertComment(profileId, commenterId, comment, rating);
+            String messeage = email2 + ":\n" + comment + "\nranking:" + rating + "\n";
+
+            try {
+                // 尝试发送邮件
+                sendEmail(email1, "Comments for your profile", messeage);
+            } catch (Exception emailException) {
+                // 捕获邮件发送失败的异常
+                emailException.printStackTrace();
+                System.err.println("Failed to send email, but the comment was saved successfully.");
+            }
+
 
             return ResponseEntity.ok("Comment submitted successfully!");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to submit comment.");
+        }
+    }
+
+    public static void sendEmail(String to, String subject, String body) {
+        final String from = "3175023883@qq.com";
+        final String password = "zkkhkngfqbjidggd";
+
+        String host = "smtp.qq.com";
+        int port = 587;
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", String.valueOf(port));
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from)); // 发件人
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to)); // 收件人
+            message.setSubject(subject); // 邮件主题
+            message.setText(body); // 邮件正文
+
+            Transport.send(message);
+            System.out.println("邮件发送成功！");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.err.println("邮件发送失败！");
         }
     }
 
@@ -365,6 +418,29 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+
+    @GetMapping("/getRecentUseBots")
+    public ResponseEntity<?> getRecentUseBots(@RequestParam("email") String email) {
+        System.out.println(7777);
+        try {
+            // 校验 email 参数是否为空
+            if (email == null || email.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("Email parameter cannot be empty");
+            }
+            int userId = userMapper.getUserIdByEmail(email);
+            List<Map<String, Object>> users = userMapper.getRecentUseBots(userId);
+
+            if (users == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch user details");
         }
     }
 
