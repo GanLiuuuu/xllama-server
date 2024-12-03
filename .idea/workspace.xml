@@ -4,37 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="132ac021-b77b-446d-b5ca-fb710001ba78" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Bot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatInteraction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatInteraction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatSession.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatSession.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotCommentDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotCommentDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/UserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/UserDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserBotsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserBotsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/XllamaServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/XllamaServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/CorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/CorsConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/WebSocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/WebSocketConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/lastUseTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/lastUseTime.class" afterDir="false" />
-    </list>
+    <list default="true" id="132ac021-b77b-446d-b5ca-fb710001ba78" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +125,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="Admin" />
                       </list>
                     </value>
                   </entry>
