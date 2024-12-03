@@ -3,6 +3,7 @@ package com.example.xllamaserver;
 import com.alibaba.fastjson2.JSONObject;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
+import org.apache.ibatis.annotations.DeleteProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class BotController {
     public String insertBot(@RequestPart("productDetails") Bot bot,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
         if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
             return "bot already existed";
-        bot.setAvatarUrl(uploadToSmms(avatarFile));
+            bot.setAvatarUrl(uploadToSmms(avatarFile));
         //TODO:trans botfile
         try{
             botMapper.insertBot(bot);
@@ -33,16 +34,36 @@ public class BotController {
     @GetMapping("/showall")
     public List<Bot> showallbots(){
         try{
-            return botMapper.getAllBots();
+            List<Bot> bots = botMapper.getAllBots();
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavg(bots.get(i).getId()));
+            }
+            return bots;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+    @GetMapping("/recommend")
+    public List<Bot> recommendBots(String user){
+        try{
+            List<Bot> bots = botMapper.recommendBots(user);
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavg(bots.get(i).getId()));
+            }
+            return bots;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     @GetMapping("/userBots")
     public List<Bot> showuserbot(@RequestParam("id") String user){
         try {
-            return botMapper.selectByAuthor(user);
+            List<Bot> bots = botMapper.selectByAuthor(user);
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavg(bots.get(i).getId()));
+            }
+            return bots;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -52,7 +73,9 @@ public class BotController {
     public Bot showbot(@RequestParam("id") Integer bot){
         try {
             botMapper.updateViews(bot);
-            return botMapper.selectById(bot);
+            Bot bot1 = botMapper.selectById(bot);
+            bot1.setRating(findavg(bot));
+            return bot1;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -121,8 +144,11 @@ public class BotController {
     @GetMapping("/recentUse")
     public List<lastUseTime> getRecentBot(@RequestParam("id") String user){
         try{
-
-            return botMapper.getRecent(user);
+            List<lastUseTime> bots = botMapper.getRecent(user);
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavg(bots.get(i).getId()));
+            }
+            return bots;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -131,6 +157,15 @@ public class BotController {
     public ResponseEntity<List<Bot>> getUserBots(@PathVariable String email) {
         List<Bot> bots = botMapper.getBotsByUserEmail(email);
         return ResponseEntity.ok(bots);
+    }
+
+    @GetMapping("/ifSubscribe")
+    public boolean ifUserBots(@RequestParam("botId") Integer bot,@RequestParam("email") String email) {
+        try{
+            return botMapper.ifUserBot(email,bot);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PostMapping("/{email}/{botId}")
@@ -177,5 +212,4 @@ public class BotController {
             return null;
         }
     }
-
 }

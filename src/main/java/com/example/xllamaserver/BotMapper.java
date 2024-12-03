@@ -14,6 +14,12 @@ public interface BotMapper {
     """)
     List<Bot> getBotsByUserEmail(String email);
 
+    @Select("""
+        SELECT COUNT(*) FROM UserBots ub
+        WHERE ub.user_email = #{email} and ub.bot_id=#{bot};
+    """)
+    boolean ifUserBot(String email, Integer bot);
+
     @Insert("INSERT INTO UserBots(user_email, bot_id) VALUES(#{userEmail}, #{botId})")
     void addUserBot(@Param("userEmail") String userEmail, @Param("botId") Integer botId);
 
@@ -24,15 +30,15 @@ public interface BotMapper {
 
     @Insert("""
          INSERT INTO Bot(name,description,imgSrc,avatarUrl,price,version,highlight,createdBy) 
-         VALUES(#{name},#{discription},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{created_by});""")
+         VALUES(#{name},#{discription},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{createdBy});""")
     void insertBot(Bot bot);
 
     @Select("""
-        SELECT COUNT(*) FROM Bot WHERE Bot.name = #{name} AND Bot.version = #{version} AND created_by = #{author};""")
+        SELECT COUNT(*) FROM Bot WHERE Bot.name = #{name} AND Bot.version = #{version} AND createdBy = #{author};""")
     boolean ifExist(String name, String version, String author);
 
     @Select("""
-            SELECT * FROM Bot WHERE created_by = #{author});""")
+            SELECT * FROM Bot WHERE createdBy = #{author};""")
     List<Bot> selectByAuthor(String author);
 
     @Select("""
@@ -79,7 +85,7 @@ public interface BotMapper {
     void insertReviews(String user,Integer bot,String content,Float rating);
 
     @Select("SELECT IFNULL(Round(AVG(rating),2),0) FROM Reviews WHERE bot=#{botId};")
-    Integer ratingAvg(Integer botId);
+    Float ratingAvg(Integer botId);
 
     @Select("""
     SELECT User.username as user, Reviews.bot as bot, Reviews.content as content, Reviews.rating as rating, User.avatarURL as avatarUrl,Reviews.date as date FROM Reviews
@@ -92,4 +98,33 @@ public interface BotMapper {
 
     @Select("SELECT id,bot,question,answer FROM FAQs WHERE bot=#{botId};")
     List<FAQ> showFAQs(Integer botId);
+
+    @Select("""
+            WITH SelectedBots AS (
+                SELECT bot_id
+                FROM ChatSummary
+                WHERE user_id = #{user}
+                  AND interaction_count > 30
+                ORDER BY last_interaction DESC
+                LIMIT 5
+            )
+            , UsersOfSelectedBots AS (
+                SELECT DISTINCT user_id
+                FROM ChatSummary
+                WHERE bot_id IN (SELECT bot_id FROM SelectedBots)
+                  AND interaction_count > 30
+            )
+            , BotUsageSummary AS (
+                SELECT cs.bot_id, SUM(cs.interaction_count) AS total_interaction_count
+                FROM ChatSummary cs
+                JOIN UsersOfSelectedBots usb ON cs.user_id = usb.user_id
+                GROUP BY cs.bot_id
+            )
+            SELECT b.id as id, views, name, description, imgSrc, avatarUrl, price, version, state, highlight, createdBy, createdAt
+            FROM Bot b
+            JOIN BotUsageSummary bus ON b.id = bus.bot_id
+            ORDER BY bus.total_interaction_count DESC
+            LIMIT 5;
+            """)
+    List<Bot> recommendBots(String user);
 }
