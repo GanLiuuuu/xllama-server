@@ -98,4 +98,15 @@ public class ChatController {
                     .body(Map.of("error", "Failed to clear chat history"));
         }
     }
+
+    @GetMapping("/sessions")
+    public ResponseEntity<?> getUserSessions(@RequestParam Integer userId) {
+        try {
+            List<Map<String, Object>> sessions = chatMapper.getUserSessions(userId);
+            return ResponseEntity.ok(sessions);
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.badRequest().body("Failed to get user sessions");
+        }
+    }
 }
