@@ -199,7 +199,9 @@ CREATE TABLE UserBots (
 
 -- 首先创建管理员用户
 INSERT INTO User (email, username, password, userType)
-VALUES ('admin@system.com', 'admin', '123123', 'ADMIN');
+VALUES ('admin@system.com', 'admin', '123123', 'admin');
+INSERT INTO User (email, username, password, userType)
+VALUES ('3163781466@qq.com', 'lg', '123123', 'regular');
 
 -- 禁用自增和外键检查
 
