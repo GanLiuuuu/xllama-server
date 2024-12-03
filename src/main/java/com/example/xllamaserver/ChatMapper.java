@@ -22,4 +22,13 @@ public interface ChatMapper {
     List<Map<String, Object>> getSessionHistory(@Param("sessionId") Integer sessionId);
     @Delete("DELETE FROM ChatInteraction WHERE session_id = #{sessionId}")
     void deleteSessionHistory(@Param("sessionId") Integer sessionId);
+
+    @Select("SELECT price FROM Bot WHERE id = #{botId}")
+    Float getBotPrice(Integer botId);
+
+    @Select("SELECT tokens FROM User WHERE user_id = #{userId}")
+    Integer getUserTokens(Integer userId);
+
+    @Update("UPDATE User SET tokens = tokens - #{tokens} WHERE user_id = #{userId} AND tokens >= #{tokens}")
+    int deductUserTokens(@Param("userId") Integer userId, @Param("tokens") Float tokens);
 }
