@@ -59,4 +59,12 @@ public interface AdminMapper {
 """)
     void updateBot(int botId, String name, int views, String description, boolean isOfficial, float price, String state);
 
+    @Update("UPDATE Bot SET price = #{price} WHERE id = #{botId}")
+    void updateBotPrice(int botId, float price);
+
+    @Update("UPDATE Bot SET state = 'Online' WHERE id = #{botId}")
+    void passAudit(int botId);
+
+    @Delete("delete from Bot where id = #{botId}")
+    void failAudit(int botId);
 }
