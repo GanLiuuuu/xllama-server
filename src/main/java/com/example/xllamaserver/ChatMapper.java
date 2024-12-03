@@ -31,4 +31,10 @@ public interface ChatMapper {
 
     @Update("UPDATE User SET tokens = tokens - #{tokens} WHERE user_id = #{userId} AND tokens >= #{tokens}")
     int deductUserTokens(@Param("userId") Integer userId, @Param("tokens") Float tokens);
+
+    @Select("SELECT session_id as sessionId, session_name as sessionName, created_at as createdAt " +
+            "FROM ChatSession " +
+            "WHERE user_id = #{userId} " +
+            "ORDER BY created_at DESC")
+    List<Map<String, Object>> getUserSessions(@Param("userId") Integer userId);
 }
