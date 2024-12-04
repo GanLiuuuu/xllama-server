@@ -136,26 +136,33 @@ public interface BotMapper {
 
     @Update("""
             UPDATE User AS u
+            -- 连接一个子查询，该子查询先对每个用户的calculated_value进行求和
             JOIN (
                 SELECT
-                    b.createdBy,
-                    (SUM(cs.interaction_count) - b.incentive) * b.price * 0.1 AS calculated_value
-                FROM ChatSummary AS cs
-                JOIN Bot AS b ON cs.bot_id = b.id
-                GROUP BY b.id
-            ) AS subquery ON u.email = subquery.createdBy
-            SET u.tokens = u.tokens + subquery.calculated_value;
+                    sub.createdBy,
+                    SUM(sub.calculated_value) AS total_calculated_value
+                FROM (
+                    SELECT
+                        b.createdBy,
+                        (IFNULL(SUM(cs.interaction_count), 0) - b.incentive) * b.price * 0.1 AS calculated_value
+                    FROM ChatSummary AS cs
+                    JOIN Bot AS b ON cs.bot_id = b.id
+                    GROUP BY b.id
+                ) AS sub
+                GROUP BY sub.createdBy
+            ) AS sum_subquery ON u.email = sum_subquery.createdBy
+            SET u.tokens = u.tokens + sum_subquery.total_calculated_value;
             """)
     void updateIncentive1 ();
 
     @Update("""
             UPDATE Bot AS b
-            SET b.incentive = (
+            SET b.incentive = IFNULL((
                 SELECT SUM(cs.interaction_count)
                 FROM ChatSummary AS cs
                 WHERE cs.bot_id = b.id
                 GROUP BY cs.bot_id
-            );
+            ),0);
             """)
     void updateIncentive2 ();
 }

@@ -5,40 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="683d5275-84d2-40d9-a6bf-b91b87274f10" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bc094fe5-18db-4fe9-a24b-34d10b0fd7fc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bc094fe5-18db-4fe9-a24b-34d10b0fd7fc/storage_v2/_src_/schema/xllama_database.vYBDVw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bc094fe5-18db-4fe9-a24b-34d10b0fd7fc/storage_v2/_src_/schema/xllama_database.vYBDVw.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/xllama-server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/AdminMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Bot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatInteraction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatInteraction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatSession.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/ChatSession.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotCommentDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotCommentDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/BotDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/UserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/DTO/UserDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserBotsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserBotsService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/UserMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/XllamaServerApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/XllamaServerApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/CorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/CorsConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/WebSocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/config/WebSocketConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/lastUseTime.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/lastUseTime.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,21 +21,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "GanLiuuuu"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;GanLiuuuu&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/GanLiuuuu/xllama-server.git",
-    "accountId": "5abe0d69-3a83-4b4c-9ebb-7bf7644ae7ba"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/GanLiuuuu/xllama-server.git&quot;,
+    &quot;accountId&quot;: &quot;5abe0d69-3a83-4b4c-9ebb-7bf7644ae7ba&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2pl8YHi0cXqsk3xNoQwQs0xoOrO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -75,8 +48,9 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.XllamaServerApplication.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Admin__v3",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -84,6 +58,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -98,8 +77,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -112,6 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1733329347271</updated>
       <workItem from="1733329348320" duration="1833000" />
+      <workItem from="1733332923064" duration="3825000" />
     </task>
     <servers />
   </component>
