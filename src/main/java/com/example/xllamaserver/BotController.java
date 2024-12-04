@@ -135,7 +135,7 @@ public class BotController {
     }
 
     @GetMapping("/recommend")
-    public List<Bot> recommendBots(@RequestParam("id") String user){
+    public List<Bot> recommendBots(@RequestParam("username") String user){
         try{
             List<Bot> bots = botMapper.recommendBots(user);
             for(int i=0;i<bots.size();i++){
@@ -286,7 +286,8 @@ public class BotController {
     @PostMapping("/incentive")
     public String updateIncentive(){
         try {
-            botMapper.updateIncentive();
+            botMapper.updateIncentive1();
+            botMapper.updateIncentive2();
             return "Upload incentive successfully.";
         } catch (Exception e) {
             throw new RuntimeException(e);

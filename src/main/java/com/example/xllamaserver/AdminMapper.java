@@ -60,4 +60,8 @@ public interface AdminMapper {
 
     @Delete("delete from Bot where id = #{botId}")
     void failAudit(int botId);
+
+    @Update("UPDATE User SET freeTokens = 100 WHERE userType = 'regular'")
+    void resetFreeTokens();
+
 }

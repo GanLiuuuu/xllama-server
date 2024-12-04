@@ -15,14 +15,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -31,10 +23,10 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;GanLiuuuu&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GanLiuuuu"
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
@@ -42,14 +34,11 @@
     &quot;url&quot;: &quot;https://github.com/GanLiuuuu/xllama-server&quot;,
     &quot;accountId&quot;: &quot;bf86ae5d-550d-47bc-8ee8-e90470f260d2&quot;
   }
-}</component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
-}</component>
-  <component name="ProjectId" id="2pHFv1Rm3uqt4AWz5QnXDhssxLM" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2pl8YHi0cXqsk3xNoQwQs0xoOrO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -109,8 +98,8 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="132ac021-b77b-446d-b5ca-fb710001ba78" name="Changes" comment="" />
-      <created>1732415320633</created>
+      <changelist id="683d5275-84d2-40d9-a6bf-b91b87274f10" name="Changes" comment="" />
+      <created>1733329347271</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1732415320633</updated>
