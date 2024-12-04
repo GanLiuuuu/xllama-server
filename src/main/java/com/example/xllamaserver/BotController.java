@@ -1,6 +1,8 @@
 package com.example.xllamaserver;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -18,17 +20,24 @@ public class BotController {
     @Autowired
     private BotMapper botMapper;
     @PostMapping("/add")
-    public String insertBot(@RequestPart("productDetails") Bot bot,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
-        if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
-            return "bot already existed";
+    public String insertBot(@RequestPart("productDetails") String botDetails,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Bot bot = objectMapper.readValue(botDetails, Bot.class);
+            if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
+                return "bot already existed";
             bot.setAvatarUrl(uploadToSmms(avatarFile));
-        //TODO:trans botfile
-        try{
-            botMapper.insertBot(bot);
-            return "Bot uploaded successfully";
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            //TODO:trans botfile
+            try{
+                botMapper.insertBot(bot);
+                return "Bot uploaded successfully";
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } catch (JsonProcessingException e) {
+            return "";
         }
+
     }
 
     @GetMapping("/showall")
@@ -44,8 +53,34 @@ public class BotController {
         }
     }
 
+    @GetMapping("/showAllOnline")
+    public List<Bot> showallbotsonline(){
+        try{
+            List<Bot> bots = botMapper.getAllBotsOnline();
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavg(bots.get(i).getId()));
+            }
+            return bots;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/showAllOnlineMonthly")
+    public List<Bot> showallbotsonlinemonthly(){
+        try{
+            List<Bot> bots = botMapper.getAllBotsOnline();
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavgMonth(bots.get(i).getId()));
+            }
+            return bots;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @GetMapping("/recommend")
-    public List<Bot> recommendBots(String user){
+    public List<Bot> recommendBots(@RequestParam("id") String user){
         try{
             List<Bot> bots = botMapper.recommendBots(user);
             for(int i=0;i<bots.size();i++){
@@ -85,6 +120,15 @@ public class BotController {
     public float findavg(@RequestParam("id") Integer bot){
         try {
             return botMapper.ratingAvg(bot);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/avgMonth")
+    public float findavgMonth(@RequestParam("id") Integer bot){
+        try {
+            return botMapper.ratingAvgRecent(bot);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -183,6 +227,16 @@ public class BotController {
         botMapper.removeUserBot(email, botId);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/incentive")
+    public String updateIncentive(){
+        try {
+            botMapper.updateIncentive();
+            return "Upload incentive successfully.";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     private String uploadToSmms(MultipartFile file) {
         try {
             File tempFile = File.createTempFile("avatar_", ".tmp");
@@ -212,4 +266,5 @@ public class BotController {
             return null;
         }
     }
+
 }

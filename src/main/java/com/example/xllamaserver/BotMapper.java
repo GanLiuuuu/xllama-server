@@ -28,9 +28,12 @@ public interface BotMapper {
     @Select("SELECT * FROM Bot;")
     List<Bot> getAllBots();
 
+    @Select("SELECT * FROM Bot WHERE state = 'Online';")
+    List<Bot> getAllBotsOnline();
+
     @Insert("""
          INSERT INTO Bot(name,description,imgSrc,avatarUrl,price,version,highlight,createdBy) 
-         VALUES(#{name},#{discription},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{createdBy});""")
+         VALUES(#{name},#{description},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{createdBy});""")
     void insertBot(Bot bot);
 
     @Select("""
@@ -54,8 +57,8 @@ public interface BotMapper {
     @Update("UPDATE Bot SET views=views+1 WHERE id= #{botid};")
     void updateViews(Integer botid);
 
-    @Update("UPDATE Bot SET discription = #{description} WHERE id = #{botid};")
-    void updateDiscription(String description, Integer botid);
+    @Update("UPDATE Bot SET description = #{description} WHERE id = #{botid};")
+    void updateDescription(String description, Integer botid);
 
     @Update("UPDATE Bot SET imgPath = #{imgSrc} WHERE id = #{botid};")
     void updateImgSrc(String imgSrc, Integer botid);
@@ -86,6 +89,9 @@ public interface BotMapper {
 
     @Select("SELECT IFNULL(Round(AVG(rating),2),0) FROM Reviews WHERE bot=#{botId};")
     Float ratingAvg(Integer botId);
+
+    @Select("SELECT IFNULL(Round(AVG(rating),2),0) FROM Reviews WHERE bot=#{botId} AND TIMESTAMPDIFF(DAY, date, NOW()) < 31;")
+    Float ratingAvgRecent(Integer botId);
 
     @Select("""
     SELECT User.username as user, Reviews.bot as bot, Reviews.content as content, Reviews.rating as rating, User.avatarURL as avatarUrl,Reviews.date as date FROM Reviews
@@ -127,4 +133,30 @@ public interface BotMapper {
             LIMIT 5;
             """)
     List<Bot> recommendBots(String user);
+
+    @Update("""
+            START TRANSACTION;
+            
+            UPDATE User AS u
+            JOIN (
+                SELECT
+                    b.createdBy,
+                    (SUM(cs.interaction_count) - b.incentive) * b.price * 0.1 AS calculated_value
+                FROM ChatSummary AS cs
+                JOIN Bot AS b ON cs.bot_id = b.id
+                GROUP BY b.id
+            ) AS subquery ON u.email = subquery.createdBy
+            SET u.tokens = u.tokens + subquery.calculated_value;
+            
+            UPDATE Bot AS b
+            SET b.incentive = (
+                SELECT SUM(cs.interaction_count)
+                FROM ChatSummary AS cs
+                WHERE cs.bot_id = b.id
+                GROUP BY cs.bot_id
+            );
+            
+            COMMIT;
+            """)
+    void updateIncentive ();
 }
