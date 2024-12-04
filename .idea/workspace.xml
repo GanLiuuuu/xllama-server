@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8966a2e2-d67a-4ec1-af22-9352a37f2c12" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" afterDir="false" />
-    </list>
+    <list default="true" id="8966a2e2-d67a-4ec1-af22-9352a37f2c12" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +101,7 @@
       <workItem from="1733227518969" duration="630000" />
       <workItem from="1733229650523" duration="181000" />
       <workItem from="1733282060624" duration="3954000" />
-      <workItem from="1733320275602" duration="5513000" />
+      <workItem from="1733320275602" duration="7471000" />
     </task>
     <servers />
   </component>
