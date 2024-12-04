@@ -133,30 +133,32 @@ create table ChatInteraction
         foreign key (bot_id) references Bot (id)
 );
 
-
-create definer = root@localhost trigger update_chat_summary
-    after insert
-    on ChatInteraction
-    for each row
+DELIMITER //
+CREATE DEFINER = root@localhost TRIGGER update_chat_summary
+    AFTER INSERT
+    ON ChatInteraction
+    FOR EACH ROW
 BEGIN
     DECLARE existing_count INT;
     -- 检查该用户与该bot的交互是否已有汇总
-    SELECT interaction_count INTO existing_count
-    FROM ChatSummary
-    WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
+SELECT interaction_count INTO existing_count
+FROM ChatSummary
+WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
 
-    IF existing_count IS NULL THEN
+IF existing_count IS NULL THEN
         -- 如果没有汇总，则插入新的记录
         INSERT INTO ChatSummary (user_id, bot_id, interaction_count, last_interaction)
         VALUES (NEW.user_id, NEW.bot_id, 1, NEW.interaction_time);
-    ELSE
+ELSE
         -- 如果已有汇总，则更新交互次数和最后交互时间
-        UPDATE ChatSummary
-        SET interaction_count = interaction_count + 1,
-            last_interaction = NEW.interaction_time
-        WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
-    END IF;
-END;
+UPDATE ChatSummary
+SET interaction_count = interaction_count + 1,
+    last_interaction = NEW.interaction_time
+WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
+END IF;
+END //
+
+DELIMITER ;
 
 
 
