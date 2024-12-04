@@ -112,7 +112,7 @@ public interface BotMapper {
                 WHERE user_id = #{user}
                   AND interaction_count > 30
                 ORDER BY last_interaction DESC
-                LIMIT 5
+                LIMIT 3
             )
             , UsersOfSelectedBots AS (
                 SELECT DISTINCT user_id
@@ -130,7 +130,7 @@ public interface BotMapper {
             FROM Bot b
             JOIN BotUsageSummary bus ON b.id = bus.bot_id
             ORDER BY bus.total_interaction_count DESC
-            LIMIT 5;
+            LIMIT 3;
             """)
     List<Bot> recommendBots(String user);
 

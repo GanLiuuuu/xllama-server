@@ -80,7 +80,7 @@ public class BotController {
     }
 
     @GetMapping("/recommend")
-    public List<Bot> recommendBots(@RequestParam("id") String user){
+    public List<Bot> recommendBots(@RequestParam("username") String user){
         try{
             List<Bot> bots = botMapper.recommendBots(user);
             for(int i=0;i<bots.size();i++){
