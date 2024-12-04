@@ -1,28 +1,81 @@
 package com.example.xllamaserver;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.JSONReader;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.apache.ibatis.annotations.DeleteProvider;
+import org.java_websocket.handshake.ServerHandshake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.java_websocket.WebSocket;
+import org.java_websocket.client.WebSocketClient;
+
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 @RestController
 @RequestMapping("/bots")
 public class BotController {
+    private class LLMClient extends WebSocketClient {
+        private static final String URIString = "ws://localhost:8080";
+        private short status = 0;
+
+        public LLMClient() {
+            super(URI.create("ws://localhost:8080"));
+        }
+
+        @Override
+        public void onOpen(ServerHandshake serverHandshake) {
+            System.out.println("connected");
+        }
+
+        @Override
+        public void onMessage(String s) {
+            JSONObject response = JSON.parseObject(s);
+            System.out.println(response);
+        }
+
+        @Override
+        public void onClose(int i, String s, boolean b) {
+
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
+    }
     @Autowired
     private BotMapper botMapper;
     @PostMapping("/add")
     public String insertBot(@RequestPart("productDetails") Bot bot,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
+        System.out.println("Files received");
         if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
             return "bot already existed";
-            bot.setAvatarUrl(uploadToSmms(avatarFile));
-        //TODO:trans botfile
+        bot.setAvatarUrl(uploadToSmms(avatarFile));
+
+        //TODO:trans botFile
+//        LLMClient client = new LLMClient();
+//        client.connect();
+//        try {
+//            JSONObject send = new JSONObject();
+//            send.put("type", "upload");
+//            send.put("file", botFile.getBytes());
+//            client.send(send.toJSONString());
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        client.close();
+
         try{
             botMapper.insertBot(bot);
             return "Bot uploaded successfully";
