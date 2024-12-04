@@ -26,6 +26,42 @@ public class AdminController {
     @Autowired
     private AdminMapper adminmapper;
 
+    @PostMapping("/bot/changePrice")
+    public ResponseEntity<String> changePrice(@RequestParam("bot") int botId, @RequestParam("price") float price) {
+        try {
+            // 调用 AdminMapper 更新 Bot 的价格
+            adminmapper.updateBotPrice(botId, price);
+            return ResponseEntity.ok("Price updated successfully");
+        } catch (Exception e) {
+            // 处理异常
+            return ResponseEntity.status(500).body("Failed to update price: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/bot/passAudit")
+    public ResponseEntity<String> passAudit(@RequestParam("bot") int botId) {
+        try {
+            // 调用 AdminMapper 更新 Bot 的价格
+            adminmapper.passAudit(botId);
+            return ResponseEntity.ok("Price updated successfully");
+        } catch (Exception e) {
+            // 处理异常
+            return ResponseEntity.status(500).body("Failed to update price: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/bot/failAudit")
+    public ResponseEntity<String> fialAudit(@RequestParam("bot") int botId) {
+        try {
+            // 调用 AdminMapper 更新 Bot 的价格
+            adminmapper.failAudit(botId);
+            return ResponseEntity.ok("Price updated successfully");
+        } catch (Exception e) {
+            // 处理异常
+            return ResponseEntity.status(500).body("Failed to update price: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/export/comments")
     public ResponseEntity<byte[]> exportComments() {
         try {

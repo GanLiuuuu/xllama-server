@@ -10,13 +10,14 @@ create table User
     bio        text                                null,
     created_at timestamp default CURRENT_TIMESTAMP null,
     updated_at timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    points     int       default 0                 null,
-    tokens     int       default 0                 null,
+    points     float       default 0                 null,
+    tokens     float       default 0                 null,
     coverPhoto varchar(255)                        null,
     about      varchar(255)                        null,
     firstname  varchar(255)                        null,
     lastname   varchar(255)                        null,
-    country    varchar(255)                        null
+    country    varchar(255)                        null,
+    freeTokens float default 0
 );
 
 create table UserProfileComment
@@ -41,13 +42,14 @@ CREATE TABLE Bot (
     name VARCHAR(100) NOT NULL,
     views INT DEFAULT 0,
     description TEXT NOT NULL,
-    is_official BOOLEAN DEFAULT FALSE,
-    imgSrc TEXT NOT NULL,
+    isOfficial BOOLEAN DEFAULT FALSE,
+    imgSrc TEXT,
     avatarUrl TEXT NOT NULL,
-    price FLOAT NOT NULL,
+    price FLOAT DEFAULT 0.0 NOT NULL,
     version TEXT NOT NULL,
     highlight TEXT NOT NULL,
     state ENUM('Offline','Online','Error') DEFAULT 'Offline' NOT NULL,
+    incentive FLOAT DEFAULT 0.0 NOT NULL ,
     createdBy VARCHAR(100) NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     FOREIGN KEY (createdBy) REFERENCES User(email)
@@ -131,30 +133,32 @@ create table ChatInteraction
         foreign key (bot_id) references Bot (id)
 );
 
-
-create definer = root@localhost trigger update_chat_summary
-    after insert
-    on ChatInteraction
-    for each row
+DELIMITER //
+CREATE DEFINER = root@localhost TRIGGER update_chat_summary
+    AFTER INSERT
+    ON ChatInteraction
+    FOR EACH ROW
 BEGIN
     DECLARE existing_count INT;
     -- 检查该用户与该bot的交互是否已有汇总
-    SELECT interaction_count INTO existing_count
-    FROM ChatSummary
-    WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
+SELECT interaction_count INTO existing_count
+FROM ChatSummary
+WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
 
-    IF existing_count IS NULL THEN
+IF existing_count IS NULL THEN
         -- 如果没有汇总，则插入新的记录
         INSERT INTO ChatSummary (user_id, bot_id, interaction_count, last_interaction)
         VALUES (NEW.user_id, NEW.bot_id, 1, NEW.interaction_time);
-    ELSE
+ELSE
         -- 如果已有汇总，则更新交互次数和最后交互时间
-        UPDATE ChatSummary
-        SET interaction_count = interaction_count + 1,
-            last_interaction = NEW.interaction_time
-        WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
-    END IF;
-END;
+UPDATE ChatSummary
+SET interaction_count = interaction_count + 1,
+    last_interaction = NEW.interaction_time
+WHERE user_id = NEW.user_id AND bot_id = NEW.bot_id;
+END IF;
+END //
+
+DELIMITER ;
 
 
 
@@ -206,17 +210,17 @@ VALUES ('3163781466@qq.com', 'lg', '123123', 'regular');
 -- 禁用自增和外键检查
 
 -- 插入默认bot
-INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('GPT3.5-turbo', 'General purpose chat model with broad knowledge', TRUE, 'https://ehall.sustech.edu.cn/new/portal/custom/img/logo/logo-mini.png', 'https://cas.sustech.edu.cn/cas/images/sustech.png', 6.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('GPT4-turbo', 'Most capable GPT-4 model for general tasks', TRUE, 'https://cdn.pixabay.com/photo/2020/03/08/05/11/android-4911426_1280.png', 'https://cdn.pixabay.com/photo/2017/01/31/17/43/android-2025857_1280.png', 19.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('GPT4-mini', 'Smaller, faster version of GPT-4', FALSE, 'https://cdn.pixabay.com/photo/2020/03/07/08/16/android-4909082_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911417_1280.png', 16.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('DALL-E 3', 'Advanced image generation model', FALSE, 'https://cdn.pixabay.com/photo/2024/08/29/05/21/robot-9005785_1280.png', 'https://cdn.pixabay.com/photo/2016/08/23/05/45/bot-1613604_1280.png', 8.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('Translator', 'Specialized in language translation', FALSE, 'https://cdn.pixabay.com/photo/2020/02/13/02/34/robot-4844306_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911414_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, is_official, imgSrc, avatarUrl, price, version, highlight, createdBy)
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('Math Solver', 'Specialized in solving mathematical problems', FALSE, 'https://pixabay.com/illustrations/ai-generated-brain-mind-technology-8563260/', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911416_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com');
 
 -- 重新启用自增和外键检查

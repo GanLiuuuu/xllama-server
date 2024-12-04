@@ -11,14 +11,7 @@ import java.util.List;
 public interface AdminMapper {
 
     @Select("""
-        SELECT 
-            u.user_id AS userId, u.username, 
-            b.id AS botId, b.name AS botName, 
-            c.comment_text AS comment, c.rating AS ranking, 
-            c.created_at AS commentTime
-        FROM BotComment c
-        JOIN Bot b ON c.bot_id = b.id
-        JOIN User u ON c.commenter_id = u.user_id
+        SELECT u.user_id AS userId, u.username, b.id AS botId, b.name AS botName, r.content AS comment, r.rating AS ranking, r.date AS commentTime FROM Reviews r JOIN Bot b ON r.bot = b.id JOIN User u ON r.user = u.email
     """)
     List<BotCommentDTO> getCommentDetails();
 
@@ -31,7 +24,7 @@ public interface AdminMapper {
 
     @Select("""
     SELECT 
-        id, name, views, description, is_official, price, state, createdBy, createdAt
+        id, name, views, description, isOfficial, price, state, createdBy, createdAt
     FROM Bot
 """)
     List<BotDTO> getAllBots();
@@ -52,11 +45,19 @@ public interface AdminMapper {
     SET name = #{name},
         views = #{views},
         description = #{description},
-        is_official = #{isOfficial},
+        isOfficial = #{isOfficial},
         price = #{price},
         state = #{state}
     WHERE id = #{botId}
 """)
     void updateBot(int botId, String name, int views, String description, boolean isOfficial, float price, String state);
 
+    @Update("UPDATE Bot SET price = #{price} WHERE id = #{botId}")
+    void updateBotPrice(int botId, float price);
+
+    @Update("UPDATE Bot SET state = 'Online' WHERE id = #{botId}")
+    void passAudit(int botId);
+
+    @Delete("delete from Bot where id = #{botId}")
+    void failAudit(int botId);
 }
