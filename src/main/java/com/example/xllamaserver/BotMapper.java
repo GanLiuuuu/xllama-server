@@ -109,7 +109,7 @@ public interface BotMapper {
             WITH SelectedBots AS (
                 SELECT bot_id
                 FROM ChatSummary
-                WHERE user_id = #{user}
+                WHERE user_id = (SELECT user_id FROM User WHERE email = #{user})
                   AND interaction_count > 30
                 ORDER BY last_interaction DESC
                 LIMIT 3

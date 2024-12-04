@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8966a2e2-d67a-4ec1-af22-9352a37f2c12" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/BotMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/FAQ.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/Review.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/xllamaserver/component/WebSocketServer.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,27 +58,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.XllamaServerApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;serverbot&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/天/OOAD/xllama-server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.XllamaServerApplication.executor": "Run",
+    "git-widget-placeholder": "serverbot",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/天/OOAD/xllama-client",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="XllamaServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="xllama-server" />
@@ -105,7 +109,7 @@
       <workItem from="1733227518969" duration="630000" />
       <workItem from="1733229650523" duration="181000" />
       <workItem from="1733282060624" duration="3954000" />
-      <workItem from="1733320275602" duration="2388000" />
+      <workItem from="1733320275602" duration="5513000" />
     </task>
     <servers />
   </component>
