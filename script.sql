@@ -10,13 +10,14 @@ create table User
     bio        text                                null,
     created_at timestamp default CURRENT_TIMESTAMP null,
     updated_at timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
-    points     int       default 0                 null,
-    tokens     int       default 0                 null,
+    points     float       default 0                 null,
+    tokens     float       default 0                 null,
     coverPhoto varchar(255)                        null,
     about      varchar(255)                        null,
     firstname  varchar(255)                        null,
     lastname   varchar(255)                        null,
-    country    varchar(255)                        null
+    country    varchar(255)                        null,
+    freeTokens float default 0
 );
 
 create table UserProfileComment
