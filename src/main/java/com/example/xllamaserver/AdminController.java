@@ -26,6 +26,19 @@ public class AdminController {
     @Autowired
     private AdminMapper adminmapper;
 
+    @PostMapping("/resetFreeTokens")
+    public ResponseEntity<String> resetFreeTokens(@RequestParam("reset") boolean reset) {
+        try {
+            // 调用 AdminMapper 更新 Bot 的价格
+            adminmapper.resetFreeTokens();
+            System.out.println(666);
+            return ResponseEntity.ok("Price updated successfully");
+        } catch (Exception e) {
+            // 处理异常
+            return ResponseEntity.status(500).body("Failed to update price: " + e.getMessage());
+        }
+    }
+
     @PostMapping("/bot/changePrice")
     public ResponseEntity<String> changePrice(@RequestParam("bot") int botId, @RequestParam("price") float price) {
         try {
