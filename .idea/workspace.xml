@@ -11,6 +11,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/AdminMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,6 +112,7 @@
       <created>1732415320633</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1732415320633</updated>
       <workItem from="1732415321781" duration="1722000" />
       <workItem from="1732681402434" duration="1983000" />
@@ -128,6 +131,16 @@
       <workItem from="1733318869491" duration="2740000" />
       <workItem from="1733322614649" duration="2187000" />
       <workItem from="1733324886836" duration="2698000" />
+=======
+      <updated>1733101928070</updated>
+      <workItem from="1733101929652" duration="189000" />
+      <workItem from="1733103171578" duration="2831000" />
+      <workItem from="1733106270920" duration="5292000" />
+      <workItem from="1733227518969" duration="630000" />
+      <workItem from="1733229650523" duration="181000" />
+      <workItem from="1733282060624" duration="3954000" />
+      <workItem from="1733320275602" duration="2388000" />
+>>>>>>> origin/serverbot
     </task>
     <servers />
   </component>
