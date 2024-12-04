@@ -31,7 +31,7 @@ public interface AdminMapper {
 
     @Select("""
     SELECT 
-        id, name, views, description, is_official, price, state, createdBy, createdAt
+        id, name, views, description, isOfficial, price, state, createdBy, createdAt
     FROM Bot
 """)
     List<BotDTO> getAllBots();
@@ -52,7 +52,7 @@ public interface AdminMapper {
     SET name = #{name},
         views = #{views},
         description = #{description},
-        is_official = #{isOfficial},
+        isOfficial = #{isOfficial},
         price = #{price},
         state = #{state}
     WHERE id = #{botId}
