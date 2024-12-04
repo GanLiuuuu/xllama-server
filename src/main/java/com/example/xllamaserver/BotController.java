@@ -287,7 +287,9 @@ public class BotController {
     public String updateIncentive(){
         try {
             botMapper.updateIncentive1();
+            Thread.sleep(1000);
             botMapper.updateIncentive2();
+            System.out.println(66667777);
             return "Upload incentive successfully.";
         } catch (Exception e) {
             throw new RuntimeException(e);
