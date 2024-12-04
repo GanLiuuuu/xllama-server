@@ -53,8 +53,21 @@ public class BotController {
         }
     }
 
+    @GetMapping("/showAllOnline")
+    public List<Bot> showallbotsonline(){
+        try{
+            List<Bot> bots = botMapper.getAllBotsOnline();
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavg(bots.get(i).getId()));
+            }
+            return bots;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @GetMapping("/recommend")
-    public List<Bot> recommendBots(String user){
+    public List<Bot> recommendBots(@RequestParam("id") String user){
         try{
             List<Bot> bots = botMapper.recommendBots(user);
             for(int i=0;i<bots.size();i++){
@@ -94,6 +107,15 @@ public class BotController {
     public float findavg(@RequestParam("id") Integer bot){
         try {
             return botMapper.ratingAvg(bot);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/avgMonth")
+    public float findavgMonth(@RequestParam("id") Integer bot){
+        try {
+            return botMapper.ratingAvgRecent(bot);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -192,6 +214,16 @@ public class BotController {
         botMapper.removeUserBot(email, botId);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/incentive")
+    public String updateIncentive(){
+        try {
+            botMapper.updateIncentive();
+            return "Upload incentive successfully.";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     private String uploadToSmms(MultipartFile file) {
         try {
             File tempFile = File.createTempFile("avatar_", ".tmp");
@@ -221,4 +253,5 @@ public class BotController {
             return null;
         }
     }
+
 }
