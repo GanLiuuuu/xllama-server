@@ -1,40 +1,95 @@
 package com.example.xllamaserver;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.apache.ibatis.annotations.DeleteProvider;
+import org.java_websocket.handshake.ServerHandshake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.java_websocket.WebSocket;
+import org.java_websocket.client.WebSocketClient;
+
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 @RestController
 @RequestMapping("/bots")
 public class BotController {
+    private class LLMClient extends WebSocketClient {
+        private static final String URIString = "ws://localhost:8080";
+        private short status = 0;
+
+        public LLMClient() {
+            super(URI.create(LLMClient.URIString));
+        }
+
+        @Override
+        public void onOpen(ServerHandshake serverHandshake) {
+            System.out.println("connected");
+        }
+
+        @Override
+        public void onMessage(String s) {
+            JSONObject response = JSON.parseObject(s);
+            System.out.println(response);
+        }
+
+        @Override
+        public void onClose(int i, String s, boolean b) {
+
+        }
+
+        @Override
+        public void onError(Exception e) {
+
+        }
+    }
     @Autowired
     private BotMapper botMapper;
     @PostMapping("/add")
-    public String insertBot(@RequestPart("productDetails") String botDetails,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
+    public String insertBot(@RequestPart("productDetails") String botDetails, @RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")String botFile) {
+        System.out.println("Files received");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             Bot bot = objectMapper.readValue(botDetails, Bot.class);
             if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
                 return "bot already existed";
+
             bot.setAvatarUrl(uploadToSmms(avatarFile));
-            //TODO:trans botfile
-            try{
-                botMapper.insertBot(bot);
-                return "Bot uploaded successfully";
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } catch (JsonProcessingException e) {
+            // TODO:trans botFile
+            LLMClient client = new LLMClient();
+            JSONObject value = new JSONObject();
+            value.put("id", bot.getName());
+            value.put("version", bot.getVersion());
+            value.put("url", botFile);
+
+            JSONObject send = new JSONObject();
+            send.put("type", "upload");
+            send.put("value", value);
+
+            client.connect();
+            while (!client.isOpen()) {}
+            System.out.println("To send:");
+            System.out.println(send.toJSONString());
+            client.send(send.toJSONString());
+            System.out.println("Sent");
+            client.close();
+
+            botMapper.insertBot(bot);
+            return "Bot uploaded successfully";
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return "";
         }
 
