@@ -231,7 +231,8 @@ public class BotController {
     @PostMapping("/incentive")
     public String updateIncentive(){
         try {
-            botMapper.updateIncentive();
+            botMapper.updateIncentive1();
+            botMapper.updateIncentive2();
             return "Upload incentive successfully.";
         } catch (Exception e) {
             throw new RuntimeException(e);
