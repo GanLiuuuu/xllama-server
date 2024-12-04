@@ -11,14 +11,7 @@ import java.util.List;
 public interface AdminMapper {
 
     @Select("""
-        SELECT 
-            u.user_id AS userId, u.username, 
-            b.id AS botId, b.name AS botName, 
-            c.comment_text AS comment, c.rating AS ranking, 
-            c.created_at AS commentTime
-        FROM BotComment c
-        JOIN Bot b ON c.bot_id = b.id
-        JOIN User u ON c.commenter_id = u.user_id
+        SELECT u.user_id AS userId, u.username, b.id AS botId, b.name AS botName, r.content AS comment, r.rating AS ranking, r.date AS commentTime FROM Reviews r JOIN Bot b ON r.bot = b.id JOIN User u ON r.user = u.email
     """)
     List<BotCommentDTO> getCommentDetails();
 
