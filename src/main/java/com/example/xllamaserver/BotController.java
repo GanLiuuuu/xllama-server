@@ -31,7 +31,7 @@ public class BotController {
         private short status = 0;
 
         public LLMClient() {
-            super(URI.create("ws://localhost:8080"));
+            super(URI.create(LLMClient.URIString));
         }
 
         @Override
@@ -58,23 +58,33 @@ public class BotController {
     @Autowired
     private BotMapper botMapper;
     @PostMapping("/add")
-    public String insertBot(@RequestPart("productDetails") String botDetails, @RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
+    public String insertBot(@RequestPart("productDetails") String botDetails, @RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")String botFile) {
         System.out.println("Files received");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             Bot bot = objectMapper.readValue(botDetails, Bot.class);
             if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
                 return "bot already existed";
-            bot.setAvatarUrl(uploadToSmms(avatarFile));
 
+            bot.setAvatarUrl(uploadToSmms(avatarFile));
             // TODO:trans botFile
-            // LLMClient client = new LLMClient();
-            // client.connect();
-            //     JSONObject send = new JSONObject();
-            //     send.put("type", "upload");
-            //     send.put("file", botFile.getBytes());
-            //     client.send(send.toJSONString());
-            // client.close();
+            LLMClient client = new LLMClient();
+            JSONObject value = new JSONObject();
+            value.put("id", bot.getName());
+            value.put("version", bot.getVersion());
+            value.put("url", botFile);
+
+            JSONObject send = new JSONObject();
+            send.put("type", "upload");
+            send.put("value", value);
+
+            client.connect();
+            while (!client.isOpen()) {}
+            System.out.println("To send:");
+            System.out.println(send.toJSONString());
+            client.send(send.toJSONString());
+            System.out.println("Sent");
+            client.close();
 
             botMapper.insertBot(bot);
             return "Bot uploaded successfully";
