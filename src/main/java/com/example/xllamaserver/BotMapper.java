@@ -30,7 +30,7 @@ public interface BotMapper {
 
     @Insert("""
          INSERT INTO Bot(name,description,imgSrc,avatarUrl,price,version,highlight,createdBy) 
-         VALUES(#{name},#{discription},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{createdBy});""")
+         VALUES(#{name},#{description},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{createdBy});""")
     void insertBot(Bot bot);
 
     @Select("""
@@ -54,8 +54,8 @@ public interface BotMapper {
     @Update("UPDATE Bot SET views=views+1 WHERE id= #{botid};")
     void updateViews(Integer botid);
 
-    @Update("UPDATE Bot SET discription = #{description} WHERE id = #{botid};")
-    void updateDiscription(String description, Integer botid);
+    @Update("UPDATE Bot SET description = #{description} WHERE id = #{botid};")
+    void updateDescription(String description, Integer botid);
 
     @Update("UPDATE Bot SET imgPath = #{imgSrc} WHERE id = #{botid};")
     void updateImgSrc(String imgSrc, Integer botid);

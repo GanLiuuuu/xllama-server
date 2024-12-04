@@ -1,6 +1,8 @@
 package com.example.xllamaserver;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.apache.ibatis.annotations.DeleteProvider;
@@ -18,17 +20,24 @@ public class BotController {
     @Autowired
     private BotMapper botMapper;
     @PostMapping("/add")
-    public String insertBot(@RequestPart("productDetails") Bot bot,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
-        if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
-            return "bot already existed";
+    public String insertBot(@RequestPart("productDetails") String botDetails,@RequestPart("avatarFile")MultipartFile avatarFile, @RequestPart("botFile")MultipartFile botFile) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            Bot bot = objectMapper.readValue(botDetails, Bot.class);
+            if(botMapper.ifExist(bot.getName(),bot.getVersion(),bot.getCreatedBy()))
+                return "bot already existed";
             bot.setAvatarUrl(uploadToSmms(avatarFile));
-        //TODO:trans botfile
-        try{
-            botMapper.insertBot(bot);
-            return "Bot uploaded successfully";
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            //TODO:trans botfile
+            try{
+                botMapper.insertBot(bot);
+                return "Bot uploaded successfully";
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } catch (JsonProcessingException e) {
+            return "";
         }
+
     }
 
     @GetMapping("/showall")
