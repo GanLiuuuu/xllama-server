@@ -66,6 +66,19 @@ public class BotController {
         }
     }
 
+    @GetMapping("/showAllOnlineMonthly")
+    public List<Bot> showallbotsonlinemonthly(){
+        try{
+            List<Bot> bots = botMapper.getAllBotsOnline();
+            for(int i=0;i<bots.size();i++){
+                bots.get(i).setRating(findavgMonth(bots.get(i).getId()));
+            }
+            return bots;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @GetMapping("/recommend")
     public List<Bot> recommendBots(@RequestParam("id") String user){
         try{
