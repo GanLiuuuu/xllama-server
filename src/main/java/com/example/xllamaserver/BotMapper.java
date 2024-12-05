@@ -32,8 +32,8 @@ public interface BotMapper {
     List<Bot> getAllBotsOnline();
 
     @Insert("""
-         INSERT INTO Bot(name,description,imgSrc,avatarUrl,price,version,highlight,createdBy) 
-         VALUES(#{name},#{description},#{imgSrc},#{avatarUrl},#{price},#{version},#{highlight},#{createdBy});""")
+         INSERT INTO Bot(name,description,imgSrc,avatarUrl,version,highlight,createdBy) 
+         VALUES(#{name},#{description},#{imgSrc},#{avatarUrl},#{version},#{highlight},#{createdBy});""")
     void insertBot(Bot bot);
 
     @Select("""
