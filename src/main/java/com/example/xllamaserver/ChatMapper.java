@@ -37,4 +37,13 @@ public interface ChatMapper {
             "WHERE user_id = #{userId} " +
             "ORDER BY created_at DESC")
     List<Map<String, Object>> getUserSessions(@Param("userId") Integer userId);
+
+    @Select("SELECT freeTokens FROM User WHERE user_id = #{userId}")
+    Integer getUserFreeTokens(Integer userId);
+
+    @Update("UPDATE User SET freeTokens = freeTokens - #{tokens} WHERE user_id = #{userId} AND freeTokens >= #{tokens}")
+    int deductUserFreeTokens(@Param("userId") Integer userId, @Param("tokens") Float tokens);
+
+    @Select("SELECT isOfficial FROM Bot WHERE id = #{botId}")
+    Boolean isOfficialBot(Integer botId);
 }

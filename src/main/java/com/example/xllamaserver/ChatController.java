@@ -31,27 +31,49 @@ public class ChatController {
     @PostMapping("/interaction")
     public ResponseEntity<?> saveInteraction(@RequestBody ChatInteraction interaction) {
         try {
-            // 1. 获取 bot 的价格
+            // 1. 获取 bot 的价格和类型
             Float botPrice = chatMapper.getBotPrice(interaction.getBotId());
-            if (botPrice == null) {
+            Boolean isOfficial = chatMapper.isOfficialBot(interaction.getBotId());
+            
+            if (botPrice == null || isOfficial == null) {
                 return ResponseEntity.badRequest().body("Bot not found");
             }
 
-            // 2. 检查用户的 tokens 是否足够
-            Integer userTokens = chatMapper.getUserTokens(interaction.getUserId());
-            if (userTokens == null) {
-                return ResponseEntity.badRequest().body("User not found");
-            }
+            // 2. 根据bot类型选择扣除不同的tokens
+            if (isOfficial) {
+                // 使用免费tokens
+                Integer userFreeTokens = chatMapper.getUserFreeTokens(interaction.getUserId());
+                if (userFreeTokens == null) {
+                    return ResponseEntity.badRequest().body("User not found");
+                }
 
-            if (userTokens < botPrice) {
-                return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED)
-                        .body("Insufficient tokens");
-            }
+                if (userFreeTokens < botPrice) {
+                    return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED)
+                            .body("Insufficient free tokens");
+                }
 
-            // 3. 扣除用户的 tokens
-            int updateResult = chatMapper.deductUserTokens(interaction.getUserId(), botPrice);
-            if (updateResult != 1) {
-                return ResponseEntity.badRequest().body("Failed to deduct tokens");
+                // 扣除免费tokens
+                int updateResult = chatMapper.deductUserFreeTokens(interaction.getUserId(), botPrice);
+                if (updateResult != 1) {
+                    return ResponseEntity.badRequest().body("Failed to deduct free tokens");
+                }
+            } else {
+                // 使用付费tokens
+                Integer userTokens = chatMapper.getUserTokens(interaction.getUserId());
+                if (userTokens == null) {
+                    return ResponseEntity.badRequest().body("User not found");
+                }
+
+                if (userTokens < botPrice) {
+                    return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED)
+                            .body("Insufficient tokens");
+                }
+
+                // 扣除付费tokens
+                int updateResult = chatMapper.deductUserTokens(interaction.getUserId(), botPrice);
+                if (updateResult != 1) {
+                    return ResponseEntity.badRequest().body("Failed to deduct tokens");
+                }
             }
 
             // 4. 保存交互记录
