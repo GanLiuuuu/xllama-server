@@ -224,18 +224,18 @@ VALUES ('3163781466@qq.com', 'lg', '123123', 'regular');
 -- 禁用自增和外键检查
 
 -- 插入默认bot
-INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
-VALUES ('GPT3.5-turbo', 'General purpose chat model with broad knowledge', TRUE, 'https://ehall.sustech.edu.cn/new/portal/custom/img/logo/logo-mini.png', 'https://cas.sustech.edu.cn/cas/images/sustech.png', 6.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
-VALUES ('GPT4-turbo', 'Most capable GPT-4 model for general tasks', FALSE, 'https://cdn.pixabay.com/photo/2020/03/08/05/11/android-4911426_1280.png', 'https://cdn.pixabay.com/photo/2017/01/31/17/43/android-2025857_1280.png', 19.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
-VALUES ('GPT4-mini', 'Smaller, faster version of GPT-4', FALSE, 'https://cdn.pixabay.com/photo/2020/03/07/08/16/android-4909082_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911417_1280.png', 16.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
-VALUES ('DALL-E 3', 'Advanced image generation model', FALSE, 'https://cdn.pixabay.com/photo/2024/08/29/05/21/robot-9005785_1280.png', 'https://cdn.pixabay.com/photo/2016/08/23/05/45/bot-1613604_1280.png', 8.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
-VALUES ('Translator', 'Specialized in language translation', FALSE, 'https://cdn.pixabay.com/photo/2020/02/13/02/34/robot-4844306_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911414_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com');
-INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
-VALUES ('Math Solver', 'Specialized in solving mathematical problems', FALSE, 'https://pixabay.com/illustrations/ai-generated-brain-mind-technology-8563260/', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911416_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com');
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy, createdAt)
+VALUES ('GPT3.5-turbo', 'General purpose chat model with broad knowledge', TRUE, 'https://ehall.sustech.edu.cn/new/portal/custom/img/logo/logo-mini.png', 'https://cas.sustech.edu.cn/cas/images/sustech.png', 6.99, '1.0', 'highlight introduction', '3163781466@qq.com', '2024-12-04 10:00:00');
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy, createdAt)
+VALUES ('GPT4-turbo', 'Most capable GPT-4 model for general tasks', FALSE, 'https://cdn.pixabay.com/photo/2020/03/08/05/11/android-4911426_1280.png', 'https://cdn.pixabay.com/photo/2017/01/31/17/43/android-2025857_1280.png', 19.99, '1.0', 'highlight introduction', '3163781466@qq.com', '2024-12-04 13:00:01');
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy, createdAt)
+VALUES ('GPT4-mini', 'Smaller, faster version of GPT-4', FALSE, 'https://cdn.pixabay.com/photo/2020/03/07/08/16/android-4909082_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911417_1280.png', 16.99, '1.0', 'highlight introduction', '3163781466@qq.com', '2024-09-01 11:11:11');
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy, createdAt)
+VALUES ('DALL-E 3', 'Advanced image generation model', FALSE, 'https://cdn.pixabay.com/photo/2024/08/29/05/21/robot-9005785_1280.png', 'https://cdn.pixabay.com/photo/2016/08/23/05/45/bot-1613604_1280.png', 8.99, '1.0', 'highlight introduction', '3163781466@qq.com', '2024-11-11 11:11:11');
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy, createdAt)
+VALUES ('Translator', 'Specialized in language translation', FALSE, 'https://cdn.pixabay.com/photo/2020/02/13/02/34/robot-4844306_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911414_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com', '2024-12-10 01:01:11');
+INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy, createdAt)
+VALUES ('Math Solver', 'Specialized in solving mathematical problems', FALSE, 'https://pixabay.com/illustrations/ai-generated-brain-mind-technology-8563260/', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911416_1280.png', 9.99, '1.0', 'highlight introduction', '3163781466@qq.com', '2024-12-05 22:17:35');
 
 -- 重新启用自增和外键检查
 ALTER TABLE Bot AUTO_INCREMENT = 4;
