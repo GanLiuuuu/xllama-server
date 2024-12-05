@@ -227,7 +227,7 @@ VALUES ('3163781466@qq.com', 'lg', '123123', 'regular');
 INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('GPT3.5-turbo', 'General purpose chat model with broad knowledge', TRUE, 'https://ehall.sustech.edu.cn/new/portal/custom/img/logo/logo-mini.png', 'https://cas.sustech.edu.cn/cas/images/sustech.png', 6.99, '1.0', 'highlight introduction', '3163781466@qq.com');
 INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
-VALUES ('GPT4-turbo', 'Most capable GPT-4 model for general tasks', TRUE, 'https://cdn.pixabay.com/photo/2020/03/08/05/11/android-4911426_1280.png', 'https://cdn.pixabay.com/photo/2017/01/31/17/43/android-2025857_1280.png', 19.99, '1.0', 'highlight introduction', '3163781466@qq.com');
+VALUES ('GPT4-turbo', 'Most capable GPT-4 model for general tasks', FALSE, 'https://cdn.pixabay.com/photo/2020/03/08/05/11/android-4911426_1280.png', 'https://cdn.pixabay.com/photo/2017/01/31/17/43/android-2025857_1280.png', 19.99, '1.0', 'highlight introduction', '3163781466@qq.com');
 INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
 VALUES ('GPT4-mini', 'Smaller, faster version of GPT-4', FALSE, 'https://cdn.pixabay.com/photo/2020/03/07/08/16/android-4909082_1280.png', 'https://cdn.pixabay.com/photo/2020/03/08/05/07/android-4911417_1280.png', 16.99, '1.0', 'highlight introduction', '3163781466@qq.com');
 INSERT INTO Bot (name, description, isOfficial, imgSrc, avatarUrl, price, version, highlight, createdBy)
