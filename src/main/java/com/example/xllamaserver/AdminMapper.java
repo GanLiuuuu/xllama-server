@@ -6,6 +6,7 @@ import com.example.xllamaserver.DTO.UserDTO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AdminMapper {
@@ -64,4 +65,16 @@ public interface AdminMapper {
     @Update("UPDATE User SET freeTokens = 100 WHERE userType = 'regular'")
     void resetFreeTokens();
 
+    @Update("UPDATE Bot SET isOfficial = true WHERE id = #{botId}")
+    void updateIsOfficial(int botId);
+
+    @Update("UPDATE Bot SET isOfficial = false WHERE id != #{botId}")
+    void updateIsNotOfficial(int botId);
+
+    @Select("""
+    SELECT 
+        id, name, views, description, isOfficial, avatarUrl
+    FROM Bot where isOfficial = true;
+""")
+    Map<String, String> getOfficial();
 }
