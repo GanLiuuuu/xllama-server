@@ -205,19 +205,19 @@ CREATE TABLE UserBots (
 INSERT INTO User (email, username, password, userType)
 VALUES ('admin@system.com', 'admin', '123123', 'admin');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211901@qq.com', 'amy', '123123', 'regular');
+VALUES ('12211901@qq.com', 'Amy', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211902@qq.com', 'bob', '123123', 'regular');
+VALUES ('12211902@qq.com', 'Bob', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211903@qq.com', 'cindy', '123123', 'regular');
+VALUES ('12211903@qq.com', 'Cindy', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211904@qq.com', 'derk', '123123', 'regular');
+VALUES ('12211904@qq.com', 'Derk', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211905@qq.com', 'emily', '123123', 'regular');
+VALUES ('12211905@qq.com', 'Emily', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211906@qq.com', 'frank', '123123', 'regular');
+VALUES ('12211906@qq.com', 'Frank', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211907@qq.com', 'grace', '123123', 'regular');
+VALUES ('12211907@qq.com', 'Grace', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
 VALUES ('3163781466@qq.com', 'lg', '123123', 'regular');
 
@@ -239,6 +239,9 @@ VALUES ('Math Solver', 'Specialized in solving mathematical problems', FALSE, 'h
 
 -- 重新启用自增和外键检查
 ALTER TABLE Bot AUTO_INCREMENT = 4;
+
+INSERT INTO Reviews (user, bot, content, rating, date)
+VALUES ('12211901@qq.com', 1, 'The bot is useful', 1, '2024-10-10 15:30:00');
 
 INSERT INTO ChatSummary (user_id, bot_id, interaction_count, last_interaction)
 VALUES
