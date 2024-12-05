@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Map;
 
 
 @RestController
@@ -25,6 +26,19 @@ import java.io.ByteArrayOutputStream;
 public class AdminController {
     @Autowired
     private AdminMapper adminmapper;
+
+    @GetMapping("/getOfficial")
+    public ResponseEntity<?> getUserIdByEmail() {
+        try {
+            Map<String, String> officialBot = adminmapper.getOfficial();
+            if (officialBot == null || officialBot.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No official bot found");
+            }
+            return ResponseEntity.ok(officialBot);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error getting user ID");
+        }
+    }
 
     @PostMapping("/resetFreeTokens")
     public ResponseEntity<String> resetFreeTokens(@RequestParam("reset") boolean reset) {
@@ -44,6 +58,19 @@ public class AdminController {
         try {
             // 调用 AdminMapper 更新 Bot 的价格
             adminmapper.updateBotPrice(botId, price);
+            return ResponseEntity.ok("Price updated successfully");
+        } catch (Exception e) {
+            // 处理异常
+            return ResponseEntity.status(500).body("Failed to update price: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/setCustom")
+    public ResponseEntity<String> setCustom(@RequestParam("bot") int botId) {
+        try {
+            // 调用 AdminMapper 更新 Bot 的价格
+            adminmapper.updateIsOfficial(botId);
+            adminmapper.updateIsNotOfficial(botId);
             return ResponseEntity.ok("Price updated successfully");
         } catch (Exception e) {
             // 处理异常
