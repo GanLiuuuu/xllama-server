@@ -106,19 +106,34 @@ public interface BotMapper {
     List<FAQ> showFAQs(Integer botId);
 
     @Select("""
-            WITH SelectedBots AS (
+            WITH SelectedBots1 AS (
                 SELECT bot_id
                 FROM ChatSummary
-                WHERE user_id = (SELECT user_id FROM User WHERE email = #{user})
-                  AND interaction_count > 30
+                WHERE user_id = (SELECT user_id FROM User WHERE email = #{use_id})
+                AND interaction_count > 30
                 ORDER BY last_interaction DESC
+                LIMIT 3
+            ),
+            RandomBots AS (
+                SELECT id as bot_id
+                FROM Bot
+                WHERE id NOT IN (SELECT bot_id FROM SelectedBots1)
+                ORDER BY RAND()
+                LIMIT 3
+            ),
+            SelectedBots AS (
+                SELECT bot_id
+                FROM SelectedBots1
+                UNION ALL
+                SELECT bot_id
+                FROM RandomBots
                 LIMIT 3
             )
             , UsersOfSelectedBots AS (
                 SELECT DISTINCT user_id
                 FROM ChatSummary
                 WHERE bot_id IN (SELECT bot_id FROM SelectedBots)
-                  AND interaction_count > 30
+                AND interaction_count > 30
             )
             , BotUsageSummary AS (
                 SELECT cs.bot_id, SUM(cs.interaction_count) AS total_interaction_count
