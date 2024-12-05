@@ -205,6 +205,20 @@ CREATE TABLE UserBots (
 INSERT INTO User (email, username, password, userType)
 VALUES ('admin@system.com', 'admin', '123123', 'admin');
 INSERT INTO User (email, username, password, userType)
+VALUES ('12211901@qq.com', 'amy', '123123', 'regular');
+INSERT INTO User (email, username, password, userType)
+VALUES ('12211902@qq.com', 'bob', '123123', 'regular');
+INSERT INTO User (email, username, password, userType)
+VALUES ('12211903@qq.com', 'cindy', '123123', 'regular');
+INSERT INTO User (email, username, password, userType)
+VALUES ('12211904@qq.com', 'derk', '123123', 'regular');
+INSERT INTO User (email, username, password, userType)
+VALUES ('12211905@qq.com', 'emily', '123123', 'regular');
+INSERT INTO User (email, username, password, userType)
+VALUES ('12211906@qq.com', 'frank', '123123', 'regular');
+INSERT INTO User (email, username, password, userType)
+VALUES ('12211907@qq.com', 'grace', '123123', 'regular');
+INSERT INTO User (email, username, password, userType)
 VALUES ('3163781466@qq.com', 'lg', '123123', 'regular');
 
 -- 禁用自增和外键检查
@@ -225,3 +239,27 @@ VALUES ('Math Solver', 'Specialized in solving mathematical problems', FALSE, 'h
 
 -- 重新启用自增和外键检查
 ALTER TABLE Bot AUTO_INCREMENT = 4;
+
+INSERT INTO ChatSummary (user_id, bot_id, interaction_count, last_interaction)
+VALUES
+    (2, 2, 45, '2024-02-10 08:30:00'),
+    (2, 3, 32, '2024-04-05 15:20:00'),
+    (2, 4, 28, '2024-06-18 13:40:00'),
+    (3, 1, 36, '2024-03-22 11:10:00'),
+    (3, 3, 42, '2024-07-08 09:50:00'),
+    (3, 4, 30, '2024-09-01 17:30:00'),
+    (4, 1, 38, '2024-01-15 09:45:00'),
+    (4, 2, 26, '2024-05-25 16:10:00'),
+    (4, 4, 40, '2024-10-10 12:05:00'),
+    (5, 2, 34, '2024-02-28 14:00:00'),
+    (5, 3, 48, '2024-06-05 10:30:00'),
+    (5, 4, 31, '2024-08-12 18:20:00'),
+    (6, 1, 42, '2024-03-08 13:15:00'),
+    (6, 3, 37, '2024-07-15 09:00:00'),
+    (6, 4, 29, '2024-09-20 15:45:00'),
+    (7, 1, 33, '2024-01-25 11:00:00'),
+    (7, 2, 46, '2024-04-18 17:20:00'),
+    (7, 4, 39, '2024-09-28 13:30:00'),
+    (8, 1, 44, '2024-02-05 12:50:00'),
+    (8, 2, 30, '2024-05-12 15:40:00'),
+    (8, 3, 35, '2024-07-22 10:20:00');
