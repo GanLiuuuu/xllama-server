@@ -165,4 +165,7 @@ public interface BotMapper {
             ),0);
             """)
     void updateIncentive2 ();
+
+    @Select("SELECT id FROM Bot WHERE isOfficial = TRUE")
+    List<Integer> getOfficialBotIds();
 }

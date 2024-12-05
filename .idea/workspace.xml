@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd14c95d-90c8-44c9-81ff-9605786dbd8f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/xllamaserver/BotMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1733363258317</updated>
-      <workItem from="1733363259374" duration="307000" />
+      <workItem from="1733363259374" duration="1572000" />
     </task>
     <servers />
   </component>

@@ -325,4 +325,10 @@ public class BotController {
         }
     }
 
+    @GetMapping("/official")
+    public ResponseEntity<List<Integer>> getOfficialBotIds() {
+        List<Integer> officialBotIds = botMapper.getOfficialBotIds();
+        return ResponseEntity.ok(officialBotIds);
+    }
+
 }
