@@ -205,7 +205,7 @@ CREATE TABLE UserBots (
 INSERT INTO User (email, username, password, userType)
 VALUES ('admin@system.com', 'admin', '123123', 'admin');
 INSERT INTO User (email, username, password, userType)
-VALUES ('12211901@qq.com', 'Amy', '123123', 'regular');
+VALUES ('12211905@mail.sustech.edu.cn', 'Amy', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
 VALUES ('12211902@qq.com', 'Bob', '123123', 'regular');
 INSERT INTO User (email, username, password, userType)
